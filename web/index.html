@@ -1,0 +1,47 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Understory — What grows where and when</title>
+  <link href="https://unpkg.com/maplibre-gl@4.7.1/dist/maplibre-gl.css" rel="stylesheet">
+  <link rel="stylesheet" href="styles.css">
+</head>
+<body>
+  <header>
+    <h1>Understory</h1>
+    <p class="tagline">What grows where and when</p>
+  </header>
+
+  <main>
+    <aside id="sidebar">
+      <div class="filter-bar">
+        <label class="toggle">
+          <input type="checkbox" id="inSeasonOnly">
+          <span>In season now</span>
+        </label>
+      </div>
+      <ul id="species-list"></ul>
+    </aside>
+
+    <section id="map-panel">
+      <div id="map"></div>
+    </section>
+
+    <aside id="detail-panel" class="hidden">
+      <button id="close-detail" aria-label="Close">&times;</button>
+      <div id="detail-content"></div>
+    </aside>
+  </main>
+
+  <footer id="disclaimer">
+    <strong>Not a sole identification authority.</strong>
+    Always verify with a field guide or expert before harvesting.
+    Never eat anything you cannot identify with certainty.
+    Location data is aggregated for conservation — never take more than 25% of a patch.
+  </footer>
+
+  <script src="https://unpkg.com/maplibre-gl@4.7.1/dist/maplibre-gl.js"></script>
+  <script src="app.js"></script>
+</body>
+</html>

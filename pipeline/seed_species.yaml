@@ -1,0 +1,47 @@
+# Bay Area seed species for Understory v0
+# Pipeline resolves scientificName → GBIF taxonKey at runtime
+
+region:
+  name: Bay Area
+  bbox: [-123.0, 37.0, -121.5, 38.5]  # [west, south, east, north]
+
+species:
+  - id: rubus_armeniacus
+    scientificName: Rubus armeniacus
+    commonName: Himalayan blackberry
+
+  - id: taraxacum_officinale
+    scientificName: Taraxacum officinale
+    commonName: Common dandelion
+
+  - id: urtica_dioica
+    scientificName: Urtica dioica
+    commonName: Stinging nettle
+
+  - id: allium_triquetrum
+    scientificName: Allium triquetrum
+    commonName: Three-cornered leek
+
+  - id: sambucus_caerulea
+    scientificName: Sambucus nigra subsp. caerulea
+    commonName: Blue elderberry
+
+  - id: foeniculum_vulgare
+    scientificName: Foeniculum vulgare
+    commonName: Wild fennel
+
+  - id: rubus_ursinus
+    scientificName: Rubus ursinus
+    commonName: California blackberry
+
+  - id: claytonia_perfoliata
+    scientificName: Claytonia perfoliata
+    commonName: Miner's lettuce
+
+  - id: umbellularia_californica
+    scientificName: Umbellularia californica
+    commonName: California bay laurel
+
+  - id: malva_sylvestris
+    scientificName: Malva sylvestris
+    commonName: Common mallow

@@ -1,0 +1,137 @@
+# Edibility and safety data — curated draft, verify before shipping
+# Keys match species id in seed_species.yaml
+
+rubus_armeniacus:
+  edibilityRating: 4  # 1-5 scale
+  edibleParts: [berries]
+  preparation: Ripe black berries; avoid unripe (astringent)
+  hazards: Thorns; avoid roadsides (pollution)
+  lookalikes:
+    - name: Rubus ursinus (California blackberry)
+      risk: low
+      note: Native cousin; smaller, tastier berries
+  conservation: common
+  sources:
+    - PFAF
+    - USDA PLANTS
+
+taraxacum_officinale:
+  edibilityRating: 4
+  edibleParts: [leaves, flowers, roots]
+  preparation: Young leaves in salad; roots roasted as coffee substitute
+  hazards: Bitter when mature; latex may irritate
+  lookalikes:
+    - name: Cat's ear (Hypochaeris radicata)
+      risk: low
+      note: Hairy leaves vs smooth dandelion
+  conservation: common
+  sources:
+    - PFAF
+
+urtica_dioica:
+  edibilityRating: 4
+  edibleParts: [young leaves, shoots]
+  preparation: Blanch or dry to neutralize stinging hairs; excellent soup/puree
+  hazards: Stinging hairs on raw contact; harvest with gloves
+  lookalikes:
+    - name: Wood nettle (Laportea canadensis)
+      risk: low
+      note: Not common in CA; similar sting
+  conservation: common
+  sources:
+    - PFAF
+
+allium_triquetrum:
+  edibilityRating: 4
+  edibleParts: [leaves, bulbs, flowers]
+  preparation: All parts edible; garlicky flavor; invasive — harvest freely
+  hazards: None significant when smell confirms Allium
+  lookalikes:
+    - name: Death camas (Toxicoscordion venenosum)
+      risk: deadly
+      note: NO onion/garlic smell — if it doesn't smell like onion, do not eat
+  conservation: invasive
+  sources:
+    - PFAF
+    - Calflora
+
+sambucus_caerulea:
+  edibilityRating: 3
+  edibleParts: [ripe berries, flowers]
+  preparation: Berries MUST be cooked; flowers for fritters/tea when fully open
+  hazards: Raw berries, bark, leaves, and unripe fruit are toxic (cyanogenic glycosides)
+  lookalikes:
+    - name: Red elderberry (Sambucus racemosa)
+      risk: moderate
+      note: Red clusters; also requires cooking; less desirable
+  conservation: common
+  sources:
+    - PFAF
+    - USDA
+
+foeniculum_vulgare:
+  edibilityRating: 4
+  edibleParts: [fronds, seeds, bulbs]
+  preparation: Anise-flavored; all above-ground parts edible
+  hazards: Confusable with poison hemlock — MUST confirm by crushing and smelling anise/licorice
+  lookalikes:
+    - name: Poison hemlock (Conium maculatum)
+      risk: deadly
+      note: NO anise smell; purple-spotted stems; grows in same habitats — fatal if misidentified
+  conservation: common
+  sources:
+    - PFAF
+    - Cornell toxic plants
+
+rubus_ursinus:
+  edibilityRating: 5
+  edibleParts: [berries]
+  preparation: Best native blackberry; ripe when deep purple-black
+  hazards: Thorns
+  lookalikes:
+    - name: Rubus armeniacus (Himalayan blackberry)
+      risk: low
+      note: Larger, more aggressive invasive; both edible
+  conservation: common
+  sources:
+    - PFAF
+
+claytonia_perfoliata:
+  edibilityRating: 5
+  edibleParts: [leaves, stems, flowers]
+  preparation: Raw in salads; mild, succulent; classic CA forager green
+  hazards: None significant
+  lookalikes:
+    - name: Montia perfoliata (same species, synonym)
+      risk: low
+      note: Taxonomic synonym
+  conservation: common
+  sources:
+    - PFAF
+    - Calflora
+
+umbellularia_californica:
+  edibilityRating: 2
+  edibleParts: [leaves (sparingly)]
+  preparation: Use 1/2 leaf to flavor soups — whole leaf is overpowering and can cause headache
+  hazards: Concentrated leaf oil is toxic; never eat large quantities
+  lookalikes:
+    - name: Bay laurel (Laurus nobilis)
+      risk: low
+      note: Cultivated culinary bay; similar use as seasoning only
+  conservation: common
+  sources:
+    - PFAF
+
+malva_sylvestris:
+  edibilityRating: 4
+  edibleParts: [leaves, flowers, seed pods ("cheeses")]
+  preparation: Young leaves cooked like spinach; mucilaginous texture
+  hazards: None significant
+  lookalikes:
+    - name: Other mallow species
+      risk: low
+      note: Most Malva spp. are similarly edible
+  conservation: common
+  sources:
+    - PFAF
