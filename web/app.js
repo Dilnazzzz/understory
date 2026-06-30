@@ -543,6 +543,23 @@ function renderModelSection(species) {
   const driverDir = driver[1] > 0 ? 'higher' : 'lower';
   const driverLabel = DRIVER_LABELS[driver[0]] || driver[0];
 
+  // The spatial-CV AUC is the honest score. Interpret its strength.
+  const cv = m.spatialAuc;
+  let signal, signalClass, interpretation;
+  if (cv == null) {
+    signal = 'unscored'; signalClass = 'weak';
+    interpretation = 'Too few held-out cells to cross-validate.';
+  } else if (cv >= 0.7) {
+    signal = 'strong'; signalClass = 'strong';
+    interpretation = `Real environmental niche: prefers <strong>${driverDir} ${driverLabel}</strong>. The surface is meaningful.`;
+  } else if (cv >= 0.6) {
+    signal = 'moderate'; signalClass = 'moderate';
+    interpretation = `Some environmental signal (<strong>${driverDir} ${driverLabel}</strong>), but weak — read the surface loosely.`;
+  } else {
+    signal = 'weak'; signalClass = 'weak';
+    interpretation = 'No reliable environmental signal once survey bias is removed — a generalist found wherever people look. Trust the observation map, not this surface.';
+  }
+
   return `
     <div class="section model">
       <h3>Predicted range <span class="tag-model">model</span></h3>
@@ -550,11 +567,20 @@ function renderModelSection(species) {
         <input type="checkbox" id="suit-toggle" ${showSuitability ? 'checked' : ''}>
         <span>Show suitability surface on map</span>
       </label>
+      <div class="model-scores">
+        <span class="score">
+          <span class="score-val signal-${signalClass}">${cv ?? '—'}</span>
+          <span class="score-lbl">spatial-CV AUC · ${signal}</span>
+        </span>
+        <span class="score">
+          <span class="score-val">${m.auc ?? '—'}</span>
+          <span class="score-lbl">in-sample (optimistic)</span>
+        </span>
+      </div>
       <p class="model-note">
-        Used-vs-available logistic model over elevation + climate
-        (AUC ${m.auc ?? '—'}, ${m.presenceCells} presence cells).
-        Strongest driver: <strong>${driverDir} ${driverLabel}</strong>.
-        Predicts climatically suitable ground — a hypothesis, not confirmed sightings.
+        ${interpretation}
+        <br>Used-vs-available logistic SDM with target-group background +
+        spatial block CV (${m.presenceCells} presence cells). A hypothesis, not sightings.
       </p>
     </div>
   `;

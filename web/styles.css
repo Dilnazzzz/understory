@@ -412,6 +412,18 @@ footer#disclaimer {
   margin: 0.4rem 0;
   font-size: 0.82rem;
 }
+.model-scores {
+  display: flex;
+  gap: 1.25rem;
+  margin: 0.5rem 0;
+}
+.model-scores .score { display: flex; flex-direction: column; }
+.model-scores .score-val { font-size: 1.1rem; font-weight: 700; color: var(--text); }
+.model-scores .score-lbl { font-size: 0.66rem; color: var(--muted); text-transform: uppercase; letter-spacing: 0.03em; }
+.signal-strong { color: var(--peak); }
+.signal-moderate { color: var(--warn); }
+.signal-weak { color: var(--danger); }
+
 .model-note {
   font-size: 0.76rem;
   color: var(--muted);

@@ -39,6 +39,16 @@ def _presence_indices(species: dict, cells: list[dict]) -> list[int]:
     return sorted(idx)
 
 
+def _survey_effort(species_list: list[dict], cells: list[dict]) -> list[float]:
+    """Total target-group observations per grid cell (the sampling-bias proxy)."""
+    effort = [0.0] * len(cells)
+    for sp in species_list:
+        for hex_ in sp.get("hexes", []):
+            i = _nearest_cell(hex_["lat"], hex_["lng"], cells)
+            effort[i] += hex_.get("count", 1)
+    return effort
+
+
 def build_sdm(debug: bool = False) -> dict:
     species_json = json.loads((DATA_DIR / "species.json").read_text())
     region = species_json["region"]
@@ -49,10 +59,15 @@ def build_sdm(debug: bool = False) -> dict:
     cells = build_env_grid(bbox, cache_path=ENV_CACHE, debug=debug)
     grid = [{"lat": c["lat"], "lng": c["lng"]} for c in cells]
 
+    effort = _survey_effort(species_json["species"], cells)
+    if debug:
+        surveyed = sum(1 for e in effort if e > 0)
+        print(f"  Survey effort: {surveyed}/{len(cells)} cells have target-group records")
+
     out_species = {}
     for sp in species_json["species"]:
         presence_idx = _presence_indices(sp, cells)
-        model = fit_predict(cells, presence_idx)
+        model = fit_predict(cells, presence_idx, effort)
         if model is None:
             if debug:
                 print(f"  {sp['commonName']}: skipped ({len(presence_idx)} presence cells)")
@@ -60,8 +75,9 @@ def build_sdm(debug: bool = False) -> dict:
         out_species[sp["id"]] = model
         if debug:
             print(
-                f"  {sp['commonName']}: {model['presenceCells']} presence cells, "
-                f"AUC={model['auc']}, weights={model['weights']}"
+                f"  {sp['commonName']}: {model['presenceCells']} cells, "
+                f"AUC={model['auc']} (background) / {model['spatialAuc']} (spatial CV), "
+                f"weights={model['weights']}"
             )
 
     output = {

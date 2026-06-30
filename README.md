@@ -58,8 +58,8 @@ This tool is **not** a sole identification authority. Always verify with a field
 - [x] Near-me + GDD-localized season
 - [x] Co-occurrence / indicator-species graph ("found X → Y is nearby")
 - [x] Species-distribution surface — used-vs-available logistic SDM (MaxEnt-equivalent) over elevation + climate
+- [x] Spatial bias correction — target-group background + spatial block cross-validation
 - [ ] Multi-region expansion + coverage map
-- [ ] Spatial bias correction (target-group background) + spatial cross-validation
 
 ### How the SDM works
 
@@ -69,6 +69,20 @@ inhomogeneous Poisson point process — the model MaxEnt fits (Renner & Warton
 2013) — so it's a legitimate SDM written transparently in numpy. Features
 (elevation, annual temperature, temperature seasonality, precipitation) are
 standardized with quadratic terms for unimodal niches; L2 regularization is the
-analogue of MaxEnt's. Honest limits: presence-only data is spatially biased
-(records cluster near people), background AUC is optimistic, and predictions are
+analogue of MaxEnt's.
+
+**Bias correction** is what makes it trustworthy:
+
+- *Target-group background* — presence-only data clusters where people look.
+  The background is drawn in proportion to total survey effort across all
+  species, so that bias cancels and the model isolates the real niche.
+- *Spatial block cross-validation* — nearby cells are correlated, so a random
+  split inflates accuracy. Holding out whole spatial blocks gives an honest,
+  out-of-fold AUC (reported alongside the optimistic in-sample one).
+
+The honest payoff: after correction, species separate into those with a real
+distribution (stinging nettle, spatial-CV AUC ≈ 0.74 — cooler, riparian) and
+ubiquitous generalists (Himalayan blackberry ≈ 0.46 — no environmental signal,
+found wherever people walk). The UI labels signal strength and tells you when to
+trust the observation map instead of the prediction. Predictions are
 suitability — a hypothesis — not confirmed sightings.
