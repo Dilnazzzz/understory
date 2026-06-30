@@ -9,12 +9,22 @@ let acknowledgedDeadly = new Set();
 let userLocation = null;   // { lat, lng }
 let userMarker = null;
 let seasonShift = null;    // { shiftDays, userTotal, regionTotal, base, ok }
+let suitabilityData = null; // { predStep, grid:[{lat,lng}], species:{id:{suitability,auc,weights}} }
+let showSuitability = false;
 
 const WEEK_LABELS = ['J', 'F', 'M', 'A', 'M', 'J', 'J', 'A', 'S', 'O', 'N', 'D'];
 
 async function init() {
   const resp = await fetch('data/species.json');
   data = await resp.json();
+
+  // Optional model layer; tolerate absence (build_sdm.py may not have run).
+  try {
+    const sResp = await fetch('data/suitability.json');
+    if (sResp.ok) suitabilityData = await sResp.json();
+  } catch (_) {
+    suitabilityData = null;
+  }
 
   // Render the sidebar first so a slow/blocked map CDN never blanks the UI.
   renderSpeciesList();
@@ -245,6 +255,13 @@ function updateMapLayer(speciesId) {
   });
   if (map.getSource('hexes')) map.removeSource('hexes');
 
+  // Predicted-suitability surface sits UNDER the observation hexes.
+  if (showSuitability && speciesId) {
+    renderSuitabilityLayer(speciesId);
+  } else {
+    removeSuitabilityLayer();
+  }
+
   const speciesList = speciesId
     ? data.species.filter(s => s.id === speciesId)
     : getFilteredSpecies();
@@ -311,6 +328,61 @@ function updateMapLayer(speciesId) {
       'circle-radius': 0,
     },
   });
+}
+
+// --- Predicted suitability surface (SDM) ---------------------------------
+
+function buildSuitabilityFeatures(speciesId) {
+  if (!suitabilityData || !suitabilityData.species[speciesId]) return null;
+  const model = suitabilityData.species[speciesId];
+  const grid = suitabilityData.grid;
+  const half = (suitabilityData.predStep || 0.075) / 2;
+
+  const features = grid.map((cell, i) => ({
+    type: 'Feature',
+    properties: { suit: model.suitability[i] },
+    geometry: {
+      type: 'Polygon',
+      coordinates: [[
+        [cell.lng - half, cell.lat - half],
+        [cell.lng + half, cell.lat - half],
+        [cell.lng + half, cell.lat + half],
+        [cell.lng - half, cell.lat + half],
+        [cell.lng - half, cell.lat - half],
+      ]],
+    },
+  }));
+  return { type: 'FeatureCollection', features };
+}
+
+function renderSuitabilityLayer(speciesId) {
+  if (!map || !map.isStyleLoaded()) return;
+  removeSuitabilityLayer();
+  const fc = buildSuitabilityFeatures(speciesId);
+  if (!fc) return;
+
+  map.addSource('suitability', { type: 'geojson', data: fc });
+  map.addLayer({
+    id: 'suitability-fill',
+    type: 'fill',
+    source: 'suitability',
+    paint: {
+      'fill-color': [
+        'interpolate', ['linear'], ['get', 'suit'],
+        0.0, 'rgba(38, 50, 30, 0)',
+        0.3, 'rgba(85, 139, 47, 0.18)',
+        0.6, 'rgba(124, 179, 66, 0.45)',
+        1.0, 'rgba(174, 213, 129, 0.7)',
+      ],
+      'fill-opacity': 0.8,
+    },
+  });
+}
+
+function removeSuitabilityLayer() {
+  if (!map) return;
+  if (map.getLayer('suitability-fill')) map.removeLayer('suitability-fill');
+  if (map.getSource('suitability')) map.removeSource('suitability');
 }
 
 // Register map click handlers once
@@ -421,6 +493,8 @@ function showDetail(id) {
 
       ${renderAssociations(species)}
 
+      ${renderModelSection(species)}
+
       ${renderProvenance(species)}
 
       <div class="section">
@@ -443,6 +517,47 @@ function showDetail(id) {
   content.querySelectorAll('[data-assoc-id]').forEach((el) => {
     el.addEventListener('click', () => selectSpecies(el.dataset.assocId));
   });
+
+  const suitToggle = document.getElementById('suit-toggle');
+  if (suitToggle) {
+    suitToggle.addEventListener('change', () => {
+      showSuitability = suitToggle.checked;
+      updateMapLayer(selectedSpeciesId);
+    });
+  }
+}
+
+const DRIVER_LABELS = {
+  elevation: 'elevation',
+  temp: 'temperature',
+  tempSeasonality: 'temperature seasonality',
+  precip: 'precipitation',
+};
+
+function renderModelSection(species) {
+  if (!suitabilityData || !suitabilityData.species[species.id]) return '';
+  const m = suitabilityData.species[species.id];
+
+  const driver = Object.entries(m.weights)
+    .sort((a, b) => Math.abs(b[1]) - Math.abs(a[1]))[0];
+  const driverDir = driver[1] > 0 ? 'higher' : 'lower';
+  const driverLabel = DRIVER_LABELS[driver[0]] || driver[0];
+
+  return `
+    <div class="section model">
+      <h3>Predicted range <span class="tag-model">model</span></h3>
+      <label class="toggle model-toggle">
+        <input type="checkbox" id="suit-toggle" ${showSuitability ? 'checked' : ''}>
+        <span>Show suitability surface on map</span>
+      </label>
+      <p class="model-note">
+        Used-vs-available logistic model over elevation + climate
+        (AUC ${m.auc ?? '—'}, ${m.presenceCells} presence cells).
+        Strongest driver: <strong>${driverDir} ${driverLabel}</strong>.
+        Predicts climatically suitable ground — a hypothesis, not confirmed sightings.
+      </p>
+    </div>
+  `;
 }
 
 function renderAssociations(species) {

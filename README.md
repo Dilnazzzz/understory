@@ -23,6 +23,10 @@ python build.py --species rubus_armeniacus --debug
 # Build all seed species
 python build.py --all
 
+# (Optional) Build predicted-suitability surfaces (SDM).
+# First run fetches + caches an environmental grid (elevation + climate).
+python build_sdm.py --debug
+
 # Serve the web app
 cd web
 python3 -m http.server 8080
@@ -52,5 +56,19 @@ This tool is **not** a sole identification authority. Always verify with a field
 
 - [x] Data depth + provenance (richer GBIF sampling, per-hex evidence)
 - [x] Near-me + GDD-localized season
-- [ ] Co-occurrence / indicator-species graph ("found X → Y is nearby")
-- [ ] MaxEnt species-distribution surface (predict where it grows, not just where it was seen)
+- [x] Co-occurrence / indicator-species graph ("found X → Y is nearby")
+- [x] Species-distribution surface — used-vs-available logistic SDM (MaxEnt-equivalent) over elevation + climate
+- [ ] Multi-region expansion + coverage map
+- [ ] Spatial bias correction (target-group background) + spatial cross-validation
+
+### How the SDM works
+
+A used-vs-available logistic regression (cells with occurrences = used, the
+whole grid = available background). In the heavy-background limit this is an
+inhomogeneous Poisson point process — the model MaxEnt fits (Renner & Warton
+2013) — so it's a legitimate SDM written transparently in numpy. Features
+(elevation, annual temperature, temperature seasonality, precipitation) are
+standardized with quadratic terms for unimodal niches; L2 regularization is the
+analogue of MaxEnt's. Honest limits: presence-only data is spatially biased
+(records cluster near people), background AUC is optimistic, and predictions are
+suitability — a hypothesis — not confirmed sightings.

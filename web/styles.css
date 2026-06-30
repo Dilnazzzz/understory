@@ -396,6 +396,30 @@ footer#disclaimer {
 }
 .popup-links a:hover { text-decoration: underline; }
 
+/* --- Predicted range (SDM) --- */
+.tag-model {
+  font-size: 0.6rem;
+  background: var(--accent-dim);
+  color: #fff;
+  padding: 0.1rem 0.35rem;
+  border-radius: 3px;
+  vertical-align: middle;
+  text-transform: uppercase;
+  letter-spacing: 0.04em;
+  font-weight: 700;
+}
+.model-toggle {
+  margin: 0.4rem 0;
+  font-size: 0.82rem;
+}
+.model-note {
+  font-size: 0.76rem;
+  color: var(--muted);
+  line-height: 1.45;
+  border-left: 2px solid var(--accent-dim);
+  padding-left: 0.6rem;
+}
+
 /* --- Associations (indicator-species graph) --- */
 .section.associations .assoc-intro {
   font-size: 0.78rem;
