@@ -8,6 +8,8 @@ A foraging resource that shows **what grows where and when** — grounded in GBI
 - **When**: foraging season derived from the day-of-year distribution of dated records.
 - **Near you**: optional geolocation centers the map, sorts species by nearest patch, and shows distances.
 - **Local season (GDD)**: when located, real daily temperatures ([Open-Meteo](https://open-meteo.com/), no key) drive a growing-degree-day model that shifts each season earlier/later for your microclimate.
+- **Multi-region**: switch regions (Bay Area, Puget Sound, …); each keeps the species actually present there. Adding a region is just a bounding box.
+- **Data coverage**: a toggle maps observation density so the gaps are visible — "we have little data here" is itself information.
 - **Safety-first**: deadly-lookalike gating, hazards, and "not a sole ID authority" throughout.
 
 ## Quick start
@@ -37,9 +39,9 @@ python3 -m http.server 8080
 
 ```
 understory/
-├── pipeline/          # GBIF fetch → season → H3 hex aggregation
-├── data/              # Generated species.json (frontend reads this)
-└── web/               # Static MapLibre map + season calendar
+├── pipeline/          # GBIF fetch → season → hexes → graph → coverage; SDM
+├── data/              # regions.json index + region-<id>.json + suitability-<id>.json
+└── web/               # Static MapLibre map, season calendar, region switcher
 ```
 
 ## Safety
@@ -59,7 +61,8 @@ This tool is **not** a sole identification authority. Always verify with a field
 - [x] Co-occurrence / indicator-species graph ("found X → Y is nearby")
 - [x] Species-distribution surface — used-vs-available logistic SDM (MaxEnt-equivalent) over elevation + climate
 - [x] Spatial bias correction — target-group background + spatial block cross-validation
-- [ ] Multi-region expansion + coverage map
+- [x] Multi-region expansion + data-coverage map
+- [ ] More regions + an explicit cross-region niche comparison view
 
 ### How the SDM works
 

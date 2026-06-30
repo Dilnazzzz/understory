@@ -16,9 +16,17 @@
   <main>
     <aside id="sidebar">
       <div class="filter-bar">
+        <label class="region-field">
+          <span class="field-label">Region</span>
+          <select id="region-select"></select>
+        </label>
         <label class="toggle">
           <input type="checkbox" id="inSeasonOnly">
           <span>In season now</span>
+        </label>
+        <label class="toggle">
+          <input type="checkbox" id="coverage-toggle">
+          <span>Show data coverage</span>
         </label>
         <button id="locate-btn" type="button">📍 Use my location</button>
         <div id="locate-status" class="locate-status hidden"></div>

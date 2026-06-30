@@ -1,9 +1,15 @@
-# Bay Area seed species for Understory v0
-# Pipeline resolves scientificName → GBIF taxonKey at runtime
+# Understory seed data
+# Pipeline resolves scientificName → GBIF taxonKey at runtime.
+# Species catalog is shared; each region keeps the species actually present
+# there (>= min records in its bbox), so adding a region is just a bbox.
 
-region:
-  name: Bay Area
-  bbox: [-123.0, 37.0, -121.5, 38.5]  # [west, south, east, north]
+regions:
+  - id: bay-area
+    name: Bay Area
+    bbox: [-123.0, 37.0, -121.5, 38.5]  # [west, south, east, north]
+  - id: puget-sound
+    name: Puget Sound
+    bbox: [-122.6, 47.0, -121.8, 48.1]
 
 species:
   - id: rubus_armeniacus

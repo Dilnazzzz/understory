@@ -78,6 +78,30 @@ main {
   accent-color: var(--accent);
 }
 
+.region-field {
+  display: flex;
+  flex-direction: column;
+  gap: 0.25rem;
+  margin-bottom: 0.7rem;
+}
+.field-label {
+  font-size: 0.66rem;
+  text-transform: uppercase;
+  letter-spacing: 0.05em;
+  color: var(--muted);
+}
+#region-select {
+  width: 100%;
+  padding: 0.4rem 0.5rem;
+  background: var(--surface);
+  color: var(--text);
+  border: 1px solid var(--border);
+  border-radius: 6px;
+  font-size: 0.9rem;
+  cursor: pointer;
+}
+.filter-bar .toggle { margin-bottom: 0.4rem; }
+
 #locate-btn {
   margin-top: 0.6rem;
   width: 100%;

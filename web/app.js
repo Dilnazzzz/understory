@@ -11,20 +11,24 @@ let userMarker = null;
 let seasonShift = null;    // { shiftDays, userTotal, regionTotal, base, ok }
 let suitabilityData = null; // { predStep, grid:[{lat,lng}], species:{id:{suitability,auc,weights}} }
 let showSuitability = false;
+let regionsIndex = [];      // [{id,name,bbox,center,file,speciesCount,coverage}]
+let currentRegionId = null;
+let showCoverage = false;
 
 const WEEK_LABELS = ['J', 'F', 'M', 'A', 'M', 'J', 'J', 'A', 'S', 'O', 'N', 'D'];
 
 async function init() {
-  const resp = await fetch('data/species.json');
-  data = await resp.json();
+  const index = await fetch('data/regions.json').then((r) => r.json());
+  regionsIndex = index.regions;
+  populateRegionSwitcher();
 
-  // Optional model layer; tolerate absence (build_sdm.py may not have run).
-  try {
-    const sResp = await fetch('data/suitability.json');
-    if (sResp.ok) suitabilityData = await sResp.json();
-  } catch (_) {
-    suitabilityData = null;
-  }
+  // Default region from ?region=, else the first.
+  const params = new URLSearchParams(location.search);
+  const wanted = params.get('region');
+  const defaultRegion =
+    (wanted && regionsIndex.find((r) => r.id === wanted)) || regionsIndex[0];
+
+  await loadRegionData(defaultRegion.id);
 
   // Render the sidebar first so a slow/blocked map CDN never blanks the UI.
   renderSpeciesList();
@@ -51,6 +55,13 @@ async function init() {
   });
   document.getElementById('close-detail').addEventListener('click', closeDetail);
   document.getElementById('locate-btn').addEventListener('click', handleLocate);
+  document.getElementById('region-select').addEventListener('change', (e) => {
+    switchRegion(e.target.value);
+  });
+  document.getElementById('coverage-toggle').addEventListener('change', (e) => {
+    showCoverage = e.target.checked;
+    updateCoverageLayer();
+  });
 
   // Deep link: #<species-id> opens that species (shareable, also drives tests).
   const hashId = decodeURIComponent(location.hash.replace(/^#/, ''));
@@ -59,6 +70,54 @@ async function init() {
     selectedSpeciesId = hashId;
     renderSpeciesList();
   }
+}
+
+async function loadRegionData(regionId) {
+  const entry = regionsIndex.find((r) => r.id === regionId);
+  data = await fetch(`data/${entry.file}`).then((r) => r.json());
+  currentRegionId = regionId;
+
+  suitabilityData = null;
+  try {
+    const sResp = await fetch(`data/suitability-${regionId}.json`);
+    if (sResp.ok) suitabilityData = await sResp.json();
+  } catch (_) {
+    suitabilityData = null;
+  }
+}
+
+async function switchRegion(regionId) {
+  if (regionId === currentRegionId) return;
+  selectedSpeciesId = null;
+  showSuitability = false;
+  seasonShift = null;
+  closeDetail();
+
+  await loadRegionData(regionId);
+
+  // Re-anchor the map and recompute local season if the user shared a location.
+  if (map) {
+    const [w, s, e, n] = data.region.bbox;
+    map.fitBounds([[w, s], [e, n]], { padding: 30, duration: 600 });
+  }
+  if (userLocation) {
+    setLocateStatus('Recalculating local season…');
+    loadSeasonShift().then(() => {
+      setLocateStatus(formatShiftStatus());
+      renderSpeciesList();
+    });
+  }
+
+  renderSpeciesList();
+  updateMapLayer(null);
+  updateCoverageLayer();
+}
+
+function populateRegionSwitcher() {
+  const sel = document.getElementById('region-select');
+  sel.innerHTML = regionsIndex
+    .map((r) => `<option value="${r.id}">${r.name} (${r.speciesCount})</option>`)
+    .join('');
 }
 
 // --- Location + local season ---------------------------------------------
@@ -185,6 +244,7 @@ function initMap() {
   map.on('load', () => {
     registerMapHandlers();
     updateMapLayer(null);
+    updateCoverageLayer();
   });
 }
 
@@ -383,6 +443,58 @@ function removeSuitabilityLayer() {
   if (!map) return;
   if (map.getLayer('suitability-fill')) map.removeLayer('suitability-fill');
   if (map.getSource('suitability')) map.removeSource('suitability');
+}
+
+// --- Data-coverage surface (honest about gaps) ---------------------------
+
+function updateCoverageLayer() {
+  if (!map || !map.isStyleLoaded()) return;
+  removeCoverageLayer();
+  if (!showCoverage || !data.coverage) return;
+
+  const { step, cells, summary } = data.coverage;
+  const half = step / 2;
+  const maxCount = summary.maxCount || 1;
+  // Log scale so a few mega-sampled cells don't flatten everything else.
+  const logMax = Math.log1p(maxCount);
+
+  const features = cells.map((c) => ({
+    type: 'Feature',
+    properties: { intensity: c.count > 0 ? Math.log1p(c.count) / logMax : 0, count: c.count },
+    geometry: {
+      type: 'Polygon',
+      coordinates: [[
+        [c.lng - half, c.lat - half],
+        [c.lng + half, c.lat - half],
+        [c.lng + half, c.lat + half],
+        [c.lng - half, c.lat + half],
+        [c.lng - half, c.lat - half],
+      ]],
+    },
+  }));
+
+  map.addSource('coverage', { type: 'geojson', data: { type: 'FeatureCollection', features } });
+  map.addLayer({
+    id: 'coverage-fill',
+    type: 'fill',
+    source: 'coverage',
+    paint: {
+      'fill-color': [
+        'interpolate', ['linear'], ['get', 'intensity'],
+        0.0, 'rgba(239, 83, 80, 0.22)',   // gaps glow faint red
+        0.05, 'rgba(255, 183, 77, 0.25)',  // sparse = amber
+        0.5, 'rgba(124, 179, 66, 0.35)',   // ok = green
+        1.0, 'rgba(174, 213, 129, 0.6)',   // dense
+      ],
+      'fill-opacity': 0.7,
+    },
+  });
+}
+
+function removeCoverageLayer() {
+  if (!map) return;
+  if (map.getLayer('coverage-fill')) map.removeLayer('coverage-fill');
+  if (map.getSource('coverage')) map.removeSource('coverage');
 }
 
 // Register map click handlers once

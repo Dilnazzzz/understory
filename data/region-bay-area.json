@@ -1,14 +1,19 @@
 {
   "region": {
+    "id": "bay-area",
     "name": "Bay Area",
     "bbox": [
       -123.0,
       37.0,
       -121.5,
       38.5
+    ],
+    "center": [
+      -122.25,
+      37.75
     ]
   },
-  "generatedAt": "2026-06-30T01:05:37.893893+00:00",
+  "generatedAt": "2026-06-30T01:41:52.656606+00:00",
   "species": [
     {
       "id": "rubus_armeniacus",
@@ -49812,5 +49817,1553 @@
         }
       ]
     }
-  ]
+  ],
+  "coverage": {
+    "step": 0.1,
+    "cells": [
+      {
+        "lat": 37.0,
+        "lng": -123.0,
+        "count": 0,
+        "species": 0
+      },
+      {
+        "lat": 37.0,
+        "lng": -122.9,
+        "count": 0,
+        "species": 0
+      },
+      {
+        "lat": 37.0,
+        "lng": -122.8,
+        "count": 0,
+        "species": 0
+      },
+      {
+        "lat": 37.0,
+        "lng": -122.7,
+        "count": 0,
+        "species": 0
+      },
+      {
+        "lat": 37.0,
+        "lng": -122.6,
+        "count": 0,
+        "species": 0
+      },
+      {
+        "lat": 37.0,
+        "lng": -122.5,
+        "count": 0,
+        "species": 0
+      },
+      {
+        "lat": 37.0,
+        "lng": -122.4,
+        "count": 0,
+        "species": 0
+      },
+      {
+        "lat": 37.0,
+        "lng": -122.3,
+        "count": 0,
+        "species": 0
+      },
+      {
+        "lat": 37.0,
+        "lng": -122.2,
+        "count": 9,
+        "species": 7
+      },
+      {
+        "lat": 37.0,
+        "lng": -122.1,
+        "count": 130,
+        "species": 7
+      },
+      {
+        "lat": 37.0,
+        "lng": -122.0,
+        "count": 39,
+        "species": 7
+      },
+      {
+        "lat": 37.0,
+        "lng": -121.9,
+        "count": 18,
+        "species": 4
+      },
+      {
+        "lat": 37.0,
+        "lng": -121.8,
+        "count": 4,
+        "species": 3
+      },
+      {
+        "lat": 37.0,
+        "lng": -121.7,
+        "count": 19,
+        "species": 4
+      },
+      {
+        "lat": 37.0,
+        "lng": -121.6,
+        "count": 0,
+        "species": 0
+      },
+      {
+        "lat": 37.0,
+        "lng": -121.5,
+        "count": 0,
+        "species": 0
+      },
+      {
+        "lat": 37.1,
+        "lng": -123.0,
+        "count": 0,
+        "species": 0
+      },
+      {
+        "lat": 37.1,
+        "lng": -122.9,
+        "count": 0,
+        "species": 0
+      },
+      {
+        "lat": 37.1,
+        "lng": -122.8,
+        "count": 0,
+        "species": 0
+      },
+      {
+        "lat": 37.1,
+        "lng": -122.7,
+        "count": 0,
+        "species": 0
+      },
+      {
+        "lat": 37.1,
+        "lng": -122.6,
+        "count": 0,
+        "species": 0
+      },
+      {
+        "lat": 37.1,
+        "lng": -122.5,
+        "count": 0,
+        "species": 0
+      },
+      {
+        "lat": 37.1,
+        "lng": -122.4,
+        "count": 2,
+        "species": 1
+      },
+      {
+        "lat": 37.1,
+        "lng": -122.3,
+        "count": 32,
+        "species": 8
+      },
+      {
+        "lat": 37.1,
+        "lng": -122.2,
+        "count": 7,
+        "species": 4
+      },
+      {
+        "lat": 37.1,
+        "lng": -122.1,
+        "count": 48,
+        "species": 5
+      },
+      {
+        "lat": 37.1,
+        "lng": -122.0,
+        "count": 45,
+        "species": 5
+      },
+      {
+        "lat": 37.1,
+        "lng": -121.9,
+        "count": 11,
+        "species": 4
+      },
+      {
+        "lat": 37.1,
+        "lng": -121.8,
+        "count": 47,
+        "species": 3
+      },
+      {
+        "lat": 37.1,
+        "lng": -121.7,
+        "count": 8,
+        "species": 2
+      },
+      {
+        "lat": 37.1,
+        "lng": -121.6,
+        "count": 5,
+        "species": 4
+      },
+      {
+        "lat": 37.1,
+        "lng": -121.5,
+        "count": 7,
+        "species": 2
+      },
+      {
+        "lat": 37.2,
+        "lng": -123.0,
+        "count": 0,
+        "species": 0
+      },
+      {
+        "lat": 37.2,
+        "lng": -122.9,
+        "count": 0,
+        "species": 0
+      },
+      {
+        "lat": 37.2,
+        "lng": -122.8,
+        "count": 0,
+        "species": 0
+      },
+      {
+        "lat": 37.2,
+        "lng": -122.7,
+        "count": 0,
+        "species": 0
+      },
+      {
+        "lat": 37.2,
+        "lng": -122.6,
+        "count": 0,
+        "species": 0
+      },
+      {
+        "lat": 37.2,
+        "lng": -122.5,
+        "count": 0,
+        "species": 0
+      },
+      {
+        "lat": 37.2,
+        "lng": -122.4,
+        "count": 10,
+        "species": 3
+      },
+      {
+        "lat": 37.2,
+        "lng": -122.3,
+        "count": 22,
+        "species": 3
+      },
+      {
+        "lat": 37.2,
+        "lng": -122.2,
+        "count": 11,
+        "species": 4
+      },
+      {
+        "lat": 37.2,
+        "lng": -122.1,
+        "count": 75,
+        "species": 7
+      },
+      {
+        "lat": 37.2,
+        "lng": -122.0,
+        "count": 176,
+        "species": 7
+      },
+      {
+        "lat": 37.2,
+        "lng": -121.9,
+        "count": 136,
+        "species": 8
+      },
+      {
+        "lat": 37.2,
+        "lng": -121.8,
+        "count": 203,
+        "species": 7
+      },
+      {
+        "lat": 37.2,
+        "lng": -121.7,
+        "count": 46,
+        "species": 4
+      },
+      {
+        "lat": 37.2,
+        "lng": -121.6,
+        "count": 34,
+        "species": 6
+      },
+      {
+        "lat": 37.2,
+        "lng": -121.5,
+        "count": 3,
+        "species": 2
+      },
+      {
+        "lat": 37.3,
+        "lng": -123.0,
+        "count": 0,
+        "species": 0
+      },
+      {
+        "lat": 37.3,
+        "lng": -122.9,
+        "count": 0,
+        "species": 0
+      },
+      {
+        "lat": 37.3,
+        "lng": -122.8,
+        "count": 0,
+        "species": 0
+      },
+      {
+        "lat": 37.3,
+        "lng": -122.7,
+        "count": 0,
+        "species": 0
+      },
+      {
+        "lat": 37.3,
+        "lng": -122.6,
+        "count": 0,
+        "species": 0
+      },
+      {
+        "lat": 37.3,
+        "lng": -122.5,
+        "count": 0,
+        "species": 0
+      },
+      {
+        "lat": 37.3,
+        "lng": -122.4,
+        "count": 18,
+        "species": 5
+      },
+      {
+        "lat": 37.3,
+        "lng": -122.3,
+        "count": 31,
+        "species": 7
+      },
+      {
+        "lat": 37.3,
+        "lng": -122.2,
+        "count": 118,
+        "species": 6
+      },
+      {
+        "lat": 37.3,
+        "lng": -122.1,
+        "count": 171,
+        "species": 8
+      },
+      {
+        "lat": 37.3,
+        "lng": -122.0,
+        "count": 82,
+        "species": 7
+      },
+      {
+        "lat": 37.3,
+        "lng": -121.9,
+        "count": 169,
+        "species": 7
+      },
+      {
+        "lat": 37.3,
+        "lng": -121.8,
+        "count": 157,
+        "species": 6
+      },
+      {
+        "lat": 37.3,
+        "lng": -121.7,
+        "count": 18,
+        "species": 5
+      },
+      {
+        "lat": 37.3,
+        "lng": -121.6,
+        "count": 1,
+        "species": 1
+      },
+      {
+        "lat": 37.3,
+        "lng": -121.5,
+        "count": 1,
+        "species": 1
+      },
+      {
+        "lat": 37.4,
+        "lng": -123.0,
+        "count": 0,
+        "species": 0
+      },
+      {
+        "lat": 37.4,
+        "lng": -122.9,
+        "count": 0,
+        "species": 0
+      },
+      {
+        "lat": 37.4,
+        "lng": -122.8,
+        "count": 0,
+        "species": 0
+      },
+      {
+        "lat": 37.4,
+        "lng": -122.7,
+        "count": 0,
+        "species": 0
+      },
+      {
+        "lat": 37.4,
+        "lng": -122.6,
+        "count": 0,
+        "species": 0
+      },
+      {
+        "lat": 37.4,
+        "lng": -122.5,
+        "count": 0,
+        "species": 0
+      },
+      {
+        "lat": 37.4,
+        "lng": -122.4,
+        "count": 40,
+        "species": 6
+      },
+      {
+        "lat": 37.4,
+        "lng": -122.3,
+        "count": 98,
+        "species": 8
+      },
+      {
+        "lat": 37.4,
+        "lng": -122.2,
+        "count": 252,
+        "species": 7
+      },
+      {
+        "lat": 37.4,
+        "lng": -122.1,
+        "count": 144,
+        "species": 7
+      },
+      {
+        "lat": 37.4,
+        "lng": -122.0,
+        "count": 96,
+        "species": 6
+      },
+      {
+        "lat": 37.4,
+        "lng": -121.9,
+        "count": 50,
+        "species": 7
+      },
+      {
+        "lat": 37.4,
+        "lng": -121.8,
+        "count": 114,
+        "species": 7
+      },
+      {
+        "lat": 37.4,
+        "lng": -121.7,
+        "count": 20,
+        "species": 6
+      },
+      {
+        "lat": 37.4,
+        "lng": -121.6,
+        "count": 0,
+        "species": 0
+      },
+      {
+        "lat": 37.4,
+        "lng": -121.5,
+        "count": 0,
+        "species": 0
+      },
+      {
+        "lat": 37.5,
+        "lng": -123.0,
+        "count": 0,
+        "species": 0
+      },
+      {
+        "lat": 37.5,
+        "lng": -122.9,
+        "count": 0,
+        "species": 0
+      },
+      {
+        "lat": 37.5,
+        "lng": -122.8,
+        "count": 0,
+        "species": 0
+      },
+      {
+        "lat": 37.5,
+        "lng": -122.7,
+        "count": 0,
+        "species": 0
+      },
+      {
+        "lat": 37.5,
+        "lng": -122.6,
+        "count": 0,
+        "species": 0
+      },
+      {
+        "lat": 37.5,
+        "lng": -122.5,
+        "count": 135,
+        "species": 7
+      },
+      {
+        "lat": 37.5,
+        "lng": -122.4,
+        "count": 42,
+        "species": 7
+      },
+      {
+        "lat": 37.5,
+        "lng": -122.3,
+        "count": 446,
+        "species": 8
+      },
+      {
+        "lat": 37.5,
+        "lng": -122.2,
+        "count": 46,
+        "species": 5
+      },
+      {
+        "lat": 37.5,
+        "lng": -122.1,
+        "count": 103,
+        "species": 5
+      },
+      {
+        "lat": 37.5,
+        "lng": -122.0,
+        "count": 11,
+        "species": 5
+      },
+      {
+        "lat": 37.5,
+        "lng": -121.9,
+        "count": 76,
+        "species": 6
+      },
+      {
+        "lat": 37.5,
+        "lng": -121.8,
+        "count": 70,
+        "species": 3
+      },
+      {
+        "lat": 37.5,
+        "lng": -121.7,
+        "count": 4,
+        "species": 2
+      },
+      {
+        "lat": 37.5,
+        "lng": -121.6,
+        "count": 0,
+        "species": 0
+      },
+      {
+        "lat": 37.5,
+        "lng": -121.5,
+        "count": 0,
+        "species": 0
+      },
+      {
+        "lat": 37.6,
+        "lng": -123.0,
+        "count": 0,
+        "species": 0
+      },
+      {
+        "lat": 37.6,
+        "lng": -122.9,
+        "count": 0,
+        "species": 0
+      },
+      {
+        "lat": 37.6,
+        "lng": -122.8,
+        "count": 0,
+        "species": 0
+      },
+      {
+        "lat": 37.6,
+        "lng": -122.7,
+        "count": 0,
+        "species": 0
+      },
+      {
+        "lat": 37.6,
+        "lng": -122.6,
+        "count": 0,
+        "species": 0
+      },
+      {
+        "lat": 37.6,
+        "lng": -122.5,
+        "count": 232,
+        "species": 6
+      },
+      {
+        "lat": 37.6,
+        "lng": -122.4,
+        "count": 109,
+        "species": 7
+      },
+      {
+        "lat": 37.6,
+        "lng": -122.3,
+        "count": 113,
+        "species": 6
+      },
+      {
+        "lat": 37.6,
+        "lng": -122.2,
+        "count": 14,
+        "species": 1
+      },
+      {
+        "lat": 37.6,
+        "lng": -122.1,
+        "count": 53,
+        "species": 5
+      },
+      {
+        "lat": 37.6,
+        "lng": -122.0,
+        "count": 78,
+        "species": 7
+      },
+      {
+        "lat": 37.6,
+        "lng": -121.9,
+        "count": 54,
+        "species": 5
+      },
+      {
+        "lat": 37.6,
+        "lng": -121.8,
+        "count": 61,
+        "species": 6
+      },
+      {
+        "lat": 37.6,
+        "lng": -121.7,
+        "count": 20,
+        "species": 3
+      },
+      {
+        "lat": 37.6,
+        "lng": -121.6,
+        "count": 2,
+        "species": 2
+      },
+      {
+        "lat": 37.6,
+        "lng": -121.5,
+        "count": 0,
+        "species": 0
+      },
+      {
+        "lat": 37.7,
+        "lng": -123.0,
+        "count": 0,
+        "species": 0
+      },
+      {
+        "lat": 37.7,
+        "lng": -122.9,
+        "count": 0,
+        "species": 0
+      },
+      {
+        "lat": 37.7,
+        "lng": -122.8,
+        "count": 0,
+        "species": 0
+      },
+      {
+        "lat": 37.7,
+        "lng": -122.7,
+        "count": 0,
+        "species": 0
+      },
+      {
+        "lat": 37.7,
+        "lng": -122.6,
+        "count": 0,
+        "species": 0
+      },
+      {
+        "lat": 37.7,
+        "lng": -122.5,
+        "count": 211,
+        "species": 7
+      },
+      {
+        "lat": 37.7,
+        "lng": -122.4,
+        "count": 508,
+        "species": 8
+      },
+      {
+        "lat": 37.7,
+        "lng": -122.3,
+        "count": 0,
+        "species": 0
+      },
+      {
+        "lat": 37.7,
+        "lng": -122.2,
+        "count": 24,
+        "species": 4
+      },
+      {
+        "lat": 37.7,
+        "lng": -122.1,
+        "count": 133,
+        "species": 7
+      },
+      {
+        "lat": 37.7,
+        "lng": -122.0,
+        "count": 64,
+        "species": 7
+      },
+      {
+        "lat": 37.7,
+        "lng": -121.9,
+        "count": 83,
+        "species": 7
+      },
+      {
+        "lat": 37.7,
+        "lng": -121.8,
+        "count": 78,
+        "species": 6
+      },
+      {
+        "lat": 37.7,
+        "lng": -121.7,
+        "count": 15,
+        "species": 5
+      },
+      {
+        "lat": 37.7,
+        "lng": -121.6,
+        "count": 0,
+        "species": 0
+      },
+      {
+        "lat": 37.7,
+        "lng": -121.5,
+        "count": 0,
+        "species": 0
+      },
+      {
+        "lat": 37.8,
+        "lng": -123.0,
+        "count": 0,
+        "species": 0
+      },
+      {
+        "lat": 37.8,
+        "lng": -122.9,
+        "count": 0,
+        "species": 0
+      },
+      {
+        "lat": 37.8,
+        "lng": -122.8,
+        "count": 0,
+        "species": 0
+      },
+      {
+        "lat": 37.8,
+        "lng": -122.7,
+        "count": 0,
+        "species": 0
+      },
+      {
+        "lat": 37.8,
+        "lng": -122.6,
+        "count": 0,
+        "species": 0
+      },
+      {
+        "lat": 37.8,
+        "lng": -122.5,
+        "count": 775,
+        "species": 8
+      },
+      {
+        "lat": 37.8,
+        "lng": -122.4,
+        "count": 297,
+        "species": 8
+      },
+      {
+        "lat": 37.8,
+        "lng": -122.3,
+        "count": 204,
+        "species": 7
+      },
+      {
+        "lat": 37.8,
+        "lng": -122.2,
+        "count": 704,
+        "species": 9
+      },
+      {
+        "lat": 37.8,
+        "lng": -122.1,
+        "count": 225,
+        "species": 9
+      },
+      {
+        "lat": 37.8,
+        "lng": -122.0,
+        "count": 25,
+        "species": 5
+      },
+      {
+        "lat": 37.8,
+        "lng": -121.9,
+        "count": 21,
+        "species": 6
+      },
+      {
+        "lat": 37.8,
+        "lng": -121.8,
+        "count": 8,
+        "species": 5
+      },
+      {
+        "lat": 37.8,
+        "lng": -121.7,
+        "count": 2,
+        "species": 1
+      },
+      {
+        "lat": 37.8,
+        "lng": -121.6,
+        "count": 0,
+        "species": 0
+      },
+      {
+        "lat": 37.8,
+        "lng": -121.5,
+        "count": 0,
+        "species": 0
+      },
+      {
+        "lat": 37.9,
+        "lng": -123.0,
+        "count": 0,
+        "species": 0
+      },
+      {
+        "lat": 37.9,
+        "lng": -122.9,
+        "count": 0,
+        "species": 0
+      },
+      {
+        "lat": 37.9,
+        "lng": -122.8,
+        "count": 2,
+        "species": 2
+      },
+      {
+        "lat": 37.9,
+        "lng": -122.7,
+        "count": 53,
+        "species": 7
+      },
+      {
+        "lat": 37.9,
+        "lng": -122.6,
+        "count": 510,
+        "species": 8
+      },
+      {
+        "lat": 37.9,
+        "lng": -122.5,
+        "count": 458,
+        "species": 7
+      },
+      {
+        "lat": 37.9,
+        "lng": -122.4,
+        "count": 86,
+        "species": 7
+      },
+      {
+        "lat": 37.9,
+        "lng": -122.3,
+        "count": 772,
+        "species": 9
+      },
+      {
+        "lat": 37.9,
+        "lng": -122.2,
+        "count": 219,
+        "species": 8
+      },
+      {
+        "lat": 37.9,
+        "lng": -122.1,
+        "count": 82,
+        "species": 7
+      },
+      {
+        "lat": 37.9,
+        "lng": -122.0,
+        "count": 107,
+        "species": 9
+      },
+      {
+        "lat": 37.9,
+        "lng": -121.9,
+        "count": 143,
+        "species": 6
+      },
+      {
+        "lat": 37.9,
+        "lng": -121.8,
+        "count": 2,
+        "species": 1
+      },
+      {
+        "lat": 37.9,
+        "lng": -121.7,
+        "count": 0,
+        "species": 0
+      },
+      {
+        "lat": 37.9,
+        "lng": -121.6,
+        "count": 0,
+        "species": 0
+      },
+      {
+        "lat": 37.9,
+        "lng": -121.5,
+        "count": 0,
+        "species": 0
+      },
+      {
+        "lat": 38.0,
+        "lng": -123.0,
+        "count": 20,
+        "species": 4
+      },
+      {
+        "lat": 38.0,
+        "lng": -122.9,
+        "count": 15,
+        "species": 2
+      },
+      {
+        "lat": 38.0,
+        "lng": -122.8,
+        "count": 149,
+        "species": 8
+      },
+      {
+        "lat": 38.0,
+        "lng": -122.7,
+        "count": 149,
+        "species": 8
+      },
+      {
+        "lat": 38.0,
+        "lng": -122.6,
+        "count": 346,
+        "species": 7
+      },
+      {
+        "lat": 38.0,
+        "lng": -122.5,
+        "count": 227,
+        "species": 8
+      },
+      {
+        "lat": 38.0,
+        "lng": -122.4,
+        "count": 21,
+        "species": 4
+      },
+      {
+        "lat": 38.0,
+        "lng": -122.3,
+        "count": 90,
+        "species": 8
+      },
+      {
+        "lat": 38.0,
+        "lng": -122.2,
+        "count": 43,
+        "species": 6
+      },
+      {
+        "lat": 38.0,
+        "lng": -122.1,
+        "count": 60,
+        "species": 8
+      },
+      {
+        "lat": 38.0,
+        "lng": -122.0,
+        "count": 11,
+        "species": 6
+      },
+      {
+        "lat": 38.0,
+        "lng": -121.9,
+        "count": 11,
+        "species": 2
+      },
+      {
+        "lat": 38.0,
+        "lng": -121.8,
+        "count": 14,
+        "species": 2
+      },
+      {
+        "lat": 38.0,
+        "lng": -121.7,
+        "count": 19,
+        "species": 3
+      },
+      {
+        "lat": 38.0,
+        "lng": -121.6,
+        "count": 1,
+        "species": 1
+      },
+      {
+        "lat": 38.0,
+        "lng": -121.5,
+        "count": 0,
+        "species": 0
+      },
+      {
+        "lat": 38.1,
+        "lng": -123.0,
+        "count": 21,
+        "species": 3
+      },
+      {
+        "lat": 38.1,
+        "lng": -122.9,
+        "count": 65,
+        "species": 8
+      },
+      {
+        "lat": 38.1,
+        "lng": -122.8,
+        "count": 125,
+        "species": 8
+      },
+      {
+        "lat": 38.1,
+        "lng": -122.7,
+        "count": 14,
+        "species": 5
+      },
+      {
+        "lat": 38.1,
+        "lng": -122.6,
+        "count": 76,
+        "species": 7
+      },
+      {
+        "lat": 38.1,
+        "lng": -122.5,
+        "count": 41,
+        "species": 6
+      },
+      {
+        "lat": 38.1,
+        "lng": -122.4,
+        "count": 2,
+        "species": 1
+      },
+      {
+        "lat": 38.1,
+        "lng": -122.3,
+        "count": 11,
+        "species": 3
+      },
+      {
+        "lat": 38.1,
+        "lng": -122.2,
+        "count": 102,
+        "species": 7
+      },
+      {
+        "lat": 38.1,
+        "lng": -122.1,
+        "count": 13,
+        "species": 3
+      },
+      {
+        "lat": 38.1,
+        "lng": -122.0,
+        "count": 0,
+        "species": 0
+      },
+      {
+        "lat": 38.1,
+        "lng": -121.9,
+        "count": 1,
+        "species": 1
+      },
+      {
+        "lat": 38.1,
+        "lng": -121.8,
+        "count": 2,
+        "species": 2
+      },
+      {
+        "lat": 38.1,
+        "lng": -121.7,
+        "count": 10,
+        "species": 2
+      },
+      {
+        "lat": 38.1,
+        "lng": -121.6,
+        "count": 0,
+        "species": 0
+      },
+      {
+        "lat": 38.1,
+        "lng": -121.5,
+        "count": 0,
+        "species": 0
+      },
+      {
+        "lat": 38.2,
+        "lng": -123.0,
+        "count": 6,
+        "species": 2
+      },
+      {
+        "lat": 38.2,
+        "lng": -122.9,
+        "count": 11,
+        "species": 4
+      },
+      {
+        "lat": 38.2,
+        "lng": -122.8,
+        "count": 13,
+        "species": 4
+      },
+      {
+        "lat": 38.2,
+        "lng": -122.7,
+        "count": 14,
+        "species": 6
+      },
+      {
+        "lat": 38.2,
+        "lng": -122.6,
+        "count": 35,
+        "species": 7
+      },
+      {
+        "lat": 38.2,
+        "lng": -122.5,
+        "count": 6,
+        "species": 3
+      },
+      {
+        "lat": 38.2,
+        "lng": -122.4,
+        "count": 12,
+        "species": 2
+      },
+      {
+        "lat": 38.2,
+        "lng": -122.3,
+        "count": 27,
+        "species": 5
+      },
+      {
+        "lat": 38.2,
+        "lng": -122.2,
+        "count": 26,
+        "species": 6
+      },
+      {
+        "lat": 38.2,
+        "lng": -122.1,
+        "count": 41,
+        "species": 6
+      },
+      {
+        "lat": 38.2,
+        "lng": -122.0,
+        "count": 21,
+        "species": 4
+      },
+      {
+        "lat": 38.2,
+        "lng": -121.9,
+        "count": 2,
+        "species": 2
+      },
+      {
+        "lat": 38.2,
+        "lng": -121.8,
+        "count": 0,
+        "species": 0
+      },
+      {
+        "lat": 38.2,
+        "lng": -121.7,
+        "count": 2,
+        "species": 2
+      },
+      {
+        "lat": 38.2,
+        "lng": -121.6,
+        "count": 0,
+        "species": 0
+      },
+      {
+        "lat": 38.2,
+        "lng": -121.5,
+        "count": 10,
+        "species": 4
+      },
+      {
+        "lat": 38.3,
+        "lng": -123.0,
+        "count": 3,
+        "species": 3
+      },
+      {
+        "lat": 38.3,
+        "lng": -122.9,
+        "count": 3,
+        "species": 2
+      },
+      {
+        "lat": 38.3,
+        "lng": -122.8,
+        "count": 6,
+        "species": 4
+      },
+      {
+        "lat": 38.3,
+        "lng": -122.7,
+        "count": 101,
+        "species": 8
+      },
+      {
+        "lat": 38.3,
+        "lng": -122.6,
+        "count": 50,
+        "species": 5
+      },
+      {
+        "lat": 38.3,
+        "lng": -122.5,
+        "count": 55,
+        "species": 7
+      },
+      {
+        "lat": 38.3,
+        "lng": -122.4,
+        "count": 19,
+        "species": 6
+      },
+      {
+        "lat": 38.3,
+        "lng": -122.3,
+        "count": 57,
+        "species": 6
+      },
+      {
+        "lat": 38.3,
+        "lng": -122.2,
+        "count": 14,
+        "species": 5
+      },
+      {
+        "lat": 38.3,
+        "lng": -122.1,
+        "count": 21,
+        "species": 4
+      },
+      {
+        "lat": 38.3,
+        "lng": -122.0,
+        "count": 27,
+        "species": 6
+      },
+      {
+        "lat": 38.3,
+        "lng": -121.9,
+        "count": 0,
+        "species": 0
+      },
+      {
+        "lat": 38.3,
+        "lng": -121.8,
+        "count": 3,
+        "species": 2
+      },
+      {
+        "lat": 38.3,
+        "lng": -121.7,
+        "count": 1,
+        "species": 1
+      },
+      {
+        "lat": 38.3,
+        "lng": -121.6,
+        "count": 0,
+        "species": 0
+      },
+      {
+        "lat": 38.3,
+        "lng": -121.5,
+        "count": 3,
+        "species": 3
+      },
+      {
+        "lat": 38.4,
+        "lng": -123.0,
+        "count": 12,
+        "species": 5
+      },
+      {
+        "lat": 38.4,
+        "lng": -122.9,
+        "count": 50,
+        "species": 7
+      },
+      {
+        "lat": 38.4,
+        "lng": -122.8,
+        "count": 41,
+        "species": 7
+      },
+      {
+        "lat": 38.4,
+        "lng": -122.7,
+        "count": 174,
+        "species": 7
+      },
+      {
+        "lat": 38.4,
+        "lng": -122.6,
+        "count": 63,
+        "species": 7
+      },
+      {
+        "lat": 38.4,
+        "lng": -122.5,
+        "count": 92,
+        "species": 6
+      },
+      {
+        "lat": 38.4,
+        "lng": -122.4,
+        "count": 10,
+        "species": 6
+      },
+      {
+        "lat": 38.4,
+        "lng": -122.3,
+        "count": 3,
+        "species": 3
+      },
+      {
+        "lat": 38.4,
+        "lng": -122.2,
+        "count": 0,
+        "species": 0
+      },
+      {
+        "lat": 38.4,
+        "lng": -122.1,
+        "count": 3,
+        "species": 3
+      },
+      {
+        "lat": 38.4,
+        "lng": -122.0,
+        "count": 18,
+        "species": 5
+      },
+      {
+        "lat": 38.4,
+        "lng": -121.9,
+        "count": 1,
+        "species": 1
+      },
+      {
+        "lat": 38.4,
+        "lng": -121.8,
+        "count": 0,
+        "species": 0
+      },
+      {
+        "lat": 38.4,
+        "lng": -121.7,
+        "count": 0,
+        "species": 0
+      },
+      {
+        "lat": 38.4,
+        "lng": -121.6,
+        "count": 1,
+        "species": 1
+      },
+      {
+        "lat": 38.4,
+        "lng": -121.5,
+        "count": 1,
+        "species": 1
+      },
+      {
+        "lat": 38.5,
+        "lng": -123.0,
+        "count": 2,
+        "species": 2
+      },
+      {
+        "lat": 38.5,
+        "lng": -122.9,
+        "count": 9,
+        "species": 6
+      },
+      {
+        "lat": 38.5,
+        "lng": -122.8,
+        "count": 11,
+        "species": 5
+      },
+      {
+        "lat": 38.5,
+        "lng": -122.7,
+        "count": 76,
+        "species": 6
+      },
+      {
+        "lat": 38.5,
+        "lng": -122.6,
+        "count": 35,
+        "species": 5
+      },
+      {
+        "lat": 38.5,
+        "lng": -122.5,
+        "count": 8,
+        "species": 3
+      },
+      {
+        "lat": 38.5,
+        "lng": -122.4,
+        "count": 11,
+        "species": 4
+      },
+      {
+        "lat": 38.5,
+        "lng": -122.3,
+        "count": 0,
+        "species": 0
+      },
+      {
+        "lat": 38.5,
+        "lng": -122.2,
+        "count": 1,
+        "species": 1
+      },
+      {
+        "lat": 38.5,
+        "lng": -122.1,
+        "count": 11,
+        "species": 4
+      },
+      {
+        "lat": 38.5,
+        "lng": -122.0,
+        "count": 4,
+        "species": 3
+      },
+      {
+        "lat": 38.5,
+        "lng": -121.9,
+        "count": 0,
+        "species": 0
+      },
+      {
+        "lat": 38.5,
+        "lng": -121.8,
+        "count": 0,
+        "species": 0
+      },
+      {
+        "lat": 38.5,
+        "lng": -121.7,
+        "count": 0,
+        "species": 0
+      },
+      {
+        "lat": 38.5,
+        "lng": -121.6,
+        "count": 1,
+        "species": 1
+      },
+      {
+        "lat": 38.5,
+        "lng": -121.5,
+        "count": 2,
+        "species": 2
+      }
+    ],
+    "summary": {
+      "totalRecords": 13095,
+      "cellsWithData": 172,
+      "cellsTotal": 256,
+      "coveragePct": 67.2,
+      "maxCount": 775
+    }
+  }
 }

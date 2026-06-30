@@ -1,0 +1,51 @@
+{
+  "generatedAt": "2026-06-30T01:42:47.032488+00:00",
+  "regions": [
+    {
+      "id": "bay-area",
+      "name": "Bay Area",
+      "bbox": [
+        -123.0,
+        37.0,
+        -121.5,
+        38.5
+      ],
+      "center": [
+        -122.25,
+        37.75
+      ],
+      "file": "region-bay-area.json",
+      "speciesCount": 10,
+      "coverage": {
+        "totalRecords": 13095,
+        "cellsWithData": 172,
+        "cellsTotal": 256,
+        "coveragePct": 67.2,
+        "maxCount": 775
+      }
+    },
+    {
+      "id": "puget-sound",
+      "name": "Puget Sound",
+      "bbox": [
+        -122.6,
+        47.0,
+        -121.8,
+        48.1
+      ],
+      "center": [
+        -122.2,
+        47.55
+      ],
+      "file": "region-puget-sound.json",
+      "speciesCount": 9,
+      "coverage": {
+        "totalRecords": 4098,
+        "cellsWithData": 96,
+        "cellsTotal": 108,
+        "coveragePct": 88.9,
+        "maxCount": 437
+      }
+    }
+  ]
+}
