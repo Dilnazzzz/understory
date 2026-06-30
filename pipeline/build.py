@@ -57,6 +57,8 @@ def process_species(
     dates = df["eventDate"].tolist() if not df.empty else []
     season = derive_season(dates)
 
+    provenance = _build_provenance(df, taxon["taxonKey"])
+
     # Conservation-sensitive species: omit hex detail (safety layer)
     edibility_data = edibility.get(species_id, {})
     conservation = edibility_data.get("conservation", "common")
@@ -85,7 +87,38 @@ def process_species(
             "histogram": season["histogram"],
         },
         "hexes": hexes,
+        "provenance": provenance,
         "edibility": edibility_data,
+    }
+
+
+def _build_provenance(df, taxon_key: int) -> dict:
+    """Summarize the evidence behind a species: counts, recency, sources."""
+    gbif_url = f"https://www.gbif.org/species/{taxon_key}"
+
+    if df is None or df.empty:
+        return {
+            "recordCount": 0,
+            "totalAvailable": None,
+            "yearRange": None,
+            "recentCount": 0,
+            "datasetCount": 0,
+            "gbifTaxonUrl": gbif_url,
+        }
+
+    years = [int(y) for y in df["year"].dropna().tolist()] if "year" in df else []
+    recent_cutoff = datetime.now(timezone.utc).year - 10
+    datasets = (
+        df["datasetKey"].dropna().nunique() if "datasetKey" in df else 0
+    )
+
+    return {
+        "recordCount": int(len(df)),
+        "totalAvailable": df.attrs.get("totalAvailable"),
+        "yearRange": [min(years), max(years)] if years else None,
+        "recentCount": int(sum(1 for y in years if y >= recent_cutoff)),
+        "datasetCount": int(datasets),
+        "gbifTaxonUrl": gbif_url,
     }
 
 

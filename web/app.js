@@ -13,8 +13,21 @@ async function init() {
   const resp = await fetch('data/species.json');
   data = await resp.json();
 
-  initMap();
+  // Render the sidebar first so a slow/blocked map CDN never blanks the UI.
   renderSpeciesList();
+
+  try {
+    initMap();
+  } catch (err) {
+    console.error('Map failed to initialize:', err);
+    const mapEl = document.getElementById('map');
+    if (mapEl) {
+      mapEl.innerHTML =
+        '<div class="map-error">Map could not load (check your connection). ' +
+        'Species list and details still work.</div>';
+    }
+  }
+
   document.getElementById('inSeasonOnly').addEventListener('change', () => {
     const filtered = getFilteredSpecies();
     if (selectedSpeciesId && !filtered.some(s => s.id === selectedSpeciesId)) {
@@ -96,7 +109,7 @@ function selectSpecies(id) {
 }
 
 function updateMapLayer(speciesId) {
-  if (!map.isStyleLoaded()) return;
+  if (!map || !map.isStyleLoaded()) return;
 
   // Remove existing layers/sources
   ['hex-fill', 'hex-outline'].forEach(layerId => {
@@ -120,6 +133,9 @@ function updateMapLayer(speciesId) {
           speciesId: species.id,
           commonName: species.commonName,
           count: hex.count,
+          recentCount: hex.recentCount ?? 0,
+          lastSeen: hex.lastSeen ?? null,
+          sampleIds: JSON.stringify(hex.sampleIds || []),
           intensity: hex.count / maxCount,
         },
         geometry: {
@@ -173,9 +189,28 @@ function updateMapLayer(speciesId) {
 function registerMapHandlers() {
   map.on('click', 'hex-fill', (e) => {
     const props = e.features[0].properties;
+    let ids = [];
+    try { ids = JSON.parse(props.sampleIds || '[]'); } catch (_) {}
+
+    const lastSeen = props.lastSeen
+      ? `<div class="popup-meta">Most recent: ${props.lastSeen}</div>`
+      : '';
+    const recent = props.recentCount
+      ? `<div class="popup-meta">${props.recentCount} in the last 10 years</div>`
+      : '';
+    const evidence = ids.length
+      ? `<div class="popup-links">Verify on GBIF: ${ids
+          .map((id, i) => `<a href="https://www.gbif.org/occurrence/${id}" target="_blank" rel="noopener">#${i + 1}</a>`)
+          .join(' ')}</div>`
+      : '';
+
     new maplibregl.Popup()
       .setLngLat(e.lngLat)
-      .setHTML(`<strong>${props.commonName}</strong><br>${props.count} observations nearby`)
+      .setHTML(
+        `<strong>${props.commonName}</strong>` +
+        `<div class="popup-meta">${props.count} observations in this area</div>` +
+        lastSeen + recent + evidence
+      )
       .addTo(map);
   });
 
@@ -263,6 +298,8 @@ function showDetail(id) {
 
       ${!deadly && lookalikeHtml ? `<div class="section"><h3>Lookalikes</h3>${lookalikeHtml}</div>` : ''}
 
+      ${renderProvenance(species)}
+
       <div class="section">
         <h3>Verify</h3>
         <p style="color:var(--warn)">
@@ -278,6 +315,37 @@ function showDetail(id) {
       showDetail(id);
     });
   }
+}
+
+function renderProvenance(species) {
+  const p = species.provenance || {};
+  const range = p.yearRange ? `${p.yearRange[0]}–${p.yearRange[1]}` : '—';
+  const available = p.totalAvailable
+    ? ` of ${p.totalAvailable.toLocaleString()} in this region`
+    : '';
+  const datasets = p.datasetCount
+    ? `${p.datasetCount} dataset${p.datasetCount === 1 ? '' : 's'}`
+    : '—';
+  const gbifLink = p.gbifTaxonUrl
+    ? `<a href="${p.gbifTaxonUrl}" target="_blank" rel="noopener">View on GBIF →</a>`
+    : '';
+
+  return `
+    <div class="section provenance">
+      <h3>Data &amp; evidence</h3>
+      <ul class="prov-list">
+        <li><span>Records sampled</span><strong>${(p.recordCount ?? 0).toLocaleString()}${available}</strong></li>
+        <li><span>Years sampled</span><strong>${range}</strong></li>
+        <li><span>Recent (last 10y)</span><strong>${(p.recentCount ?? 0).toLocaleString()}</strong></li>
+        <li><span>Sources</span><strong>${datasets}</strong></li>
+      </ul>
+      <p class="prov-note">
+        Maps show where this species was <em>observed and reported</em>, not everywhere it grows.
+        When thousands of records exist we sample the most recent. Records cluster near trails,
+        towns, and active observers (sampling bias). ${gbifLink}
+      </p>
+    </div>
+  `;
 }
 
 function renderSeasonStrip(season) {

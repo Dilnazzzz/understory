@@ -308,6 +308,64 @@ footer#disclaimer {
   line-height: 1.4;
 }
 
+.map-error {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  height: 100%;
+  padding: 2rem;
+  text-align: center;
+  color: var(--muted);
+  font-size: 0.9rem;
+}
+
+/* --- Map popup provenance --- */
+.maplibregl-popup-content {
+  background: var(--surface);
+  color: var(--text);
+  border: 1px solid var(--border);
+  border-radius: 8px;
+  font-size: 0.82rem;
+  padding: 0.6rem 0.75rem;
+}
+.maplibregl-popup-content strong { color: var(--peak); }
+.maplibregl-popup-tip { border-top-color: var(--surface) !important; }
+.popup-meta { color: var(--muted); margin-top: 0.2rem; }
+.popup-links { margin-top: 0.4rem; font-size: 0.78rem; color: var(--muted); }
+.popup-links a {
+  color: var(--accent);
+  text-decoration: none;
+  margin-right: 0.3rem;
+}
+.popup-links a:hover { text-decoration: underline; }
+
+/* --- Detail panel provenance --- */
+.section.provenance .prov-list {
+  list-style: none;
+  margin: 0.4rem 0 0.6rem;
+  font-size: 0.82rem;
+}
+.section.provenance .prov-list li {
+  display: flex;
+  justify-content: space-between;
+  gap: 1rem;
+  padding: 0.25rem 0;
+  border-bottom: 1px dashed var(--border);
+}
+.section.provenance .prov-list li span { color: var(--muted); }
+.section.provenance .prov-list li strong { color: var(--text); text-align: right; }
+.section.provenance .prov-note {
+  font-size: 0.78rem;
+  color: var(--muted);
+  line-height: 1.45;
+}
+.section.provenance .prov-note a {
+  color: var(--accent);
+  text-decoration: none;
+  white-space: nowrap;
+}
+.section.provenance .prov-note a:hover { text-decoration: underline; }
+
 @media (max-width: 900px) {
   main {
     grid-template-columns: 1fr;
