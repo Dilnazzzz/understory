@@ -1,6 +1,14 @@
 # Understory
 
-A foraging resource that shows **what grows where and when** — grounded in GBIF occurrence data, with safety-first edibility information.
+A foraging resource that shows **what grows where and when** — grounded in GBIF occurrence data, localized to your spot with real climate data, and built safety-first.
+
+## What it does
+
+- **Where**: live GBIF occurrence records aggregated into privacy-safe H3 hexes (~1.2 km), with per-hex evidence (recency, sources, click-through GBIF links).
+- **When**: foraging season derived from the day-of-year distribution of dated records.
+- **Near you**: optional geolocation centers the map, sorts species by nearest patch, and shows distances.
+- **Local season (GDD)**: when located, real daily temperatures ([Open-Meteo](https://open-meteo.com/), no key) drive a growing-degree-day model that shifts each season earlier/later for your microclimate.
+- **Safety-first**: deadly-lookalike gating, hazards, and "not a sole ID authority" throughout.
 
 ## Quick start
 
@@ -37,10 +45,12 @@ This tool is **not** a sole identification authority. Always verify with a field
 ## Data sources
 
 - Occurrence data: [GBIF](https://www.gbif.org/) (CC BY / CC0)
+- Daily temperature: [Open-Meteo](https://open-meteo.com/) archive API (no key) for the GDD phenology model
 - Edibility: curated from PFAF, USDA, and field-guide references — marked as draft, verify before use
 
-## v2 roadmap
+## Roadmap
 
-- MaxEnt species distribution modeling
-- Co-occurrence / indicator species graph
-- GDD-adjusted phenology
+- [x] Data depth + provenance (richer GBIF sampling, per-hex evidence)
+- [x] Near-me + GDD-localized season
+- [ ] Co-occurrence / indicator-species graph ("found X → Y is nearby")
+- [ ] MaxEnt species-distribution surface (predict where it grows, not just where it was seen)

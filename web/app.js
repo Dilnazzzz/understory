@@ -6,6 +6,9 @@ let data = null;
 let map = null;
 let selectedSpeciesId = null;
 let acknowledgedDeadly = new Set();
+let userLocation = null;   // { lat, lng }
+let userMarker = null;
+let seasonShift = null;    // { shiftDays, userTotal, regionTotal, base, ok }
 
 const WEEK_LABELS = ['J', 'F', 'M', 'A', 'M', 'J', 'J', 'A', 'S', 'O', 'N', 'D'];
 
@@ -37,6 +40,105 @@ async function init() {
     updateMapLayer(selectedSpeciesId);
   });
   document.getElementById('close-detail').addEventListener('click', closeDetail);
+  document.getElementById('locate-btn').addEventListener('click', handleLocate);
+}
+
+// --- Location + local season ---------------------------------------------
+
+async function handleLocate() {
+  const btn = document.getElementById('locate-btn');
+  btn.disabled = true;
+  setLocateStatus('Locating…');
+
+  try {
+    userLocation = await getUserLocation();
+    addUserMarker();
+    if (map) map.flyTo({ center: [userLocation.lng, userLocation.lat], zoom: 11 });
+
+    // Show distances immediately; season shift loads after.
+    setLocateStatus('Calculating local season…');
+    renderSpeciesList();
+    if (selectedSpeciesId) showDetail(selectedSpeciesId);
+
+    await loadSeasonShift();
+    setLocateStatus(formatShiftStatus());
+    renderSpeciesList();
+    if (selectedSpeciesId) showDetail(selectedSpeciesId);
+  } catch (err) {
+    console.error('locate failed', err);
+    const denied = err && err.code === 1;
+    setLocateStatus(denied ? 'Location permission denied.' : 'Could not get your location.');
+  } finally {
+    btn.disabled = false;
+  }
+}
+
+async function loadSeasonShift() {
+  const [west, south, east, north] = data.region.bbox;
+  const regionLat = (south + north) / 2;
+  const regionLng = (west + east) / 2;
+  const climYear = new Date().getFullYear() - 1;
+  try {
+    seasonShift = await computeSeasonShift(
+      userLocation.lat, userLocation.lng, regionLat, regionLng, climYear
+    );
+  } catch (err) {
+    console.error('season shift failed', err);
+    seasonShift = null;
+  }
+}
+
+function setLocateStatus(text) {
+  const el = document.getElementById('locate-status');
+  if (!el) return;
+  el.textContent = text;
+  el.classList.remove('hidden');
+}
+
+function formatShiftStatus() {
+  if (!seasonShift || !seasonShift.ok) return 'Located. (Local season unavailable.)';
+  const d = seasonShift.shiftDays;
+  if (d === 0) return 'Located. Season here ≈ regional average.';
+  const dir = d < 0 ? 'earlier' : 'later';
+  return `Located. Season here ≈ ${Math.abs(d)} days ${dir} than regional avg.`;
+}
+
+function addUserMarker() {
+  if (!map) return;
+  if (userMarker) userMarker.remove();
+  userMarker = new maplibregl.Marker({ color: '#ffb74d' })
+    .setLngLat([userLocation.lng, userLocation.lat])
+    .setPopup(new maplibregl.Popup().setHTML('<strong>You are here</strong>'))
+    .addTo(map);
+}
+
+function nearestHexKm(species) {
+  if (!userLocation || !species.hexes || !species.hexes.length) return null;
+  let min = Infinity;
+  for (const h of species.hexes) {
+    const d = haversineKm(userLocation.lat, userLocation.lng, h.lat, h.lng);
+    if (d < min) min = d;
+  }
+  return min;
+}
+
+function formatKm(km) {
+  if (km == null) return '';
+  return km < 10 ? `${km.toFixed(1)} km` : `${Math.round(km)} km`;
+}
+
+// Localize a species' season using the GDD day-shift. Returns null if no shift.
+function localizedSeason(season) {
+  if (!seasonShift || !seasonShift.ok) return null;
+  const active = shiftWeeks(season.activeWeeks, seasonShift.shiftDays);
+  const peak = shiftWeeks(season.peakWeeks, seasonShift.shiftDays);
+  const cur = getISOWeek(new Date());
+  const nearby = new Set([cur - 1, cur, cur + 1].map((x) => ((x - 1 + 52) % 52) + 1));
+  return {
+    activeWeeks: active,
+    peakWeeks: peak,
+    inSeasonNow: active.some((w) => nearby.has(w)),
+  };
 }
 
 function initMap() {
@@ -70,10 +172,21 @@ function initMap() {
 
 function getFilteredSpecies() {
   const inSeasonOnly = document.getElementById('inSeasonOnly').checked;
-  return data.species.filter(s => {
-    if (inSeasonOnly && !s.season.inSeasonNow) return false;
+  let list = data.species.filter(s => {
+    const effective = localizedSeason(s.season) || s.season;
+    if (inSeasonOnly && !effective.inSeasonNow) return false;
     return true;
   });
+
+  // When located, surface the closest patches first.
+  if (userLocation) {
+    list = list.slice().sort((a, b) => {
+      const da = nearestHexKm(a);
+      const db = nearestHexKm(b);
+      return (da ?? Infinity) - (db ?? Infinity);
+    });
+  }
+  return list;
 }
 
 function renderSpeciesList() {
@@ -86,14 +199,21 @@ function renderSpeciesList() {
     li.className = 'species-item' + (species.id === selectedSpeciesId ? ' active' : '');
     li.dataset.id = species.id;
 
-    const seasonBadge = species.season.inSeasonNow
+    const local = localizedSeason(species.season);
+    const effectiveSeason = local || species.season;
+    const seasonBadge = effectiveSeason.inSeasonNow
       ? '<span class="badge in-season">In season</span>'
       : '<span class="badge out-season">Off season</span>';
+
+    const km = nearestHexKm(species);
+    const distBadge = km != null
+      ? `<span class="badge dist">📍 ${formatKm(km)}</span>`
+      : '';
 
     li.innerHTML = `
       <div class="species-name">${species.commonName}</div>
       <div class="species-scientific">${species.scientificName}</div>
-      ${seasonBadge}
+      ${seasonBadge}${distBadge}
     `;
 
     li.addEventListener('click', () => selectSpecies(species.id));
@@ -265,24 +385,17 @@ function showDetail(id) {
     <div class="detail-scientific">${species.scientificName}</div>
     <div class="detail-meta">
       ${species.occurrenceCount} observations ·
-      ${species.hexes.length} map areas
+      ${species.hexes.length} map areas${(() => {
+        const km = nearestHexKm(species);
+        return km != null ? ` · 📍 nearest patch ~${formatKm(km)}` : '';
+      })()}
     </div>
 
     ${deadlyBanner}
     ${ackButton}
 
     <div class="harvest-section ${harvestHidden}" id="harvest-info">
-      <div class="section">
-        <h3>Season</h3>
-        ${renderSeasonStrip(species.season)}
-        <div class="season-labels">
-          ${WEEK_LABELS.map(m => `<span>${m}</span>`).join('')}
-        </div>
-        <p style="margin-top:0.5rem;font-size:0.8rem;color:var(--muted)">
-          ${species.season.inSeasonNow ? 'Likely in season this week' : 'Likely off season this week'}
-          (derived from ${species.season.histogram.reduce((a,b)=>a+b,0)} dated records)
-        </p>
-      </div>
+      ${renderSeasonSection(species)}
 
       <div class="section">
         <h3>Edible parts</h3>
@@ -344,6 +457,45 @@ function renderProvenance(species) {
         When thousands of records exist we sample the most recent. Records cluster near trails,
         towns, and active observers (sampling bias). ${gbifLink}
       </p>
+    </div>
+  `;
+}
+
+function renderSeasonSection(species) {
+  const local = localizedSeason(species.season);
+  const displaySeason = local || species.season;
+  const totalRecords = species.season.histogram.reduce((a, b) => a + b, 0);
+
+  const verdict = displaySeason.inSeasonNow ? 'Likely in season' : 'Likely off season';
+  const scope = local ? 'at your location this week' : 'this week (regional)';
+
+  let gddNote = '';
+  if (local && seasonShift && seasonShift.ok) {
+    const d = seasonShift.shiftDays;
+    if (d === 0) {
+      gddNote = `<p class="gdd-note">Local heat accumulation ≈ regional average (base ${seasonShift.base}°C).</p>`;
+    } else {
+      const dir = d < 0 ? 'earlier' : 'later';
+      const speed = d < 0 ? 'faster' : 'slower';
+      gddNote = `<p class="gdd-note">
+        Shifted ~${Math.abs(d)} days ${dir}: your location accumulates
+        growing-degree-days ${speed} than the regional average (base ${seasonShift.base}°C).
+      </p>`;
+    }
+  }
+
+  return `
+    <div class="section">
+      <h3>Season ${local ? '<span class="tag-local">local</span>' : ''}</h3>
+      ${renderSeasonStrip(displaySeason)}
+      <div class="season-labels">
+        ${WEEK_LABELS.map(m => `<span>${m}</span>`).join('')}
+      </div>
+      <p class="season-verdict">
+        ${verdict} ${scope}
+        <span class="muted-small">· from ${totalRecords} dated records</span>
+      </p>
+      ${gddNote}
     </div>
   `;
 }

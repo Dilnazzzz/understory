@@ -20,6 +20,8 @@
           <input type="checkbox" id="inSeasonOnly">
           <span>In season now</span>
         </label>
+        <button id="locate-btn" type="button">📍 Use my location</button>
+        <div id="locate-status" class="locate-status hidden"></div>
       </div>
       <ul id="species-list"></ul>
     </aside>
@@ -42,6 +44,7 @@
   </footer>
 
   <script src="https://unpkg.com/maplibre-gl@4.7.1/dist/maplibre-gl.js"></script>
+  <script src="geo.js"></script>
   <script src="app.js"></script>
 </body>
 </html>

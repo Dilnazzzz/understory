@@ -78,6 +78,28 @@ main {
   accent-color: var(--accent);
 }
 
+#locate-btn {
+  margin-top: 0.6rem;
+  width: 100%;
+  padding: 0.45rem 0.6rem;
+  background: var(--surface);
+  color: var(--text);
+  border: 1px solid var(--accent-dim);
+  border-radius: 6px;
+  font-size: 0.82rem;
+  cursor: pointer;
+  transition: background 0.15s;
+}
+#locate-btn:hover:not(:disabled) { background: rgba(124, 179, 66, 0.15); }
+#locate-btn:disabled { opacity: 0.6; cursor: default; }
+
+.locate-status {
+  margin-top: 0.5rem;
+  font-size: 0.74rem;
+  color: var(--muted);
+  line-height: 1.35;
+}
+
 #species-list {
   list-style: none;
 }
@@ -129,6 +151,41 @@ main {
 .badge.out-season {
   background: var(--border);
   color: var(--muted);
+}
+
+.badge.dist {
+  background: transparent;
+  color: var(--warn);
+  border: 1px solid var(--warn);
+  margin-left: 0.35rem;
+}
+
+.tag-local {
+  font-size: 0.6rem;
+  background: var(--warn);
+  color: #1a1f16;
+  padding: 0.1rem 0.35rem;
+  border-radius: 3px;
+  vertical-align: middle;
+  text-transform: uppercase;
+  letter-spacing: 0.04em;
+  font-weight: 700;
+}
+
+.season-verdict {
+  margin-top: 0.5rem;
+  font-size: 0.8rem;
+  color: var(--text);
+}
+.season-verdict .muted-small { color: var(--muted); font-size: 0.74rem; }
+
+.gdd-note {
+  margin-top: 0.4rem;
+  font-size: 0.76rem;
+  color: var(--muted);
+  line-height: 1.45;
+  border-left: 2px solid var(--accent-dim);
+  padding-left: 0.6rem;
 }
 
 #map-panel {
