@@ -41,6 +41,14 @@ async function init() {
   });
   document.getElementById('close-detail').addEventListener('click', closeDetail);
   document.getElementById('locate-btn').addEventListener('click', handleLocate);
+
+  // Deep link: #<species-id> opens that species (shareable, also drives tests).
+  const hashId = decodeURIComponent(location.hash.replace(/^#/, ''));
+  if (hashId && data.species.some((s) => s.id === hashId)) {
+    showDetail(hashId);
+    selectedSpeciesId = hashId;
+    renderSpeciesList();
+  }
 }
 
 // --- Location + local season ---------------------------------------------
@@ -411,6 +419,8 @@ function showDetail(id) {
 
       ${!deadly && lookalikeHtml ? `<div class="section"><h3>Lookalikes</h3>${lookalikeHtml}</div>` : ''}
 
+      ${renderAssociations(species)}
+
       ${renderProvenance(species)}
 
       <div class="section">
@@ -428,6 +438,42 @@ function showDetail(id) {
       showDetail(id);
     });
   }
+
+  // Walkable graph: clicking an associated species navigates to it.
+  content.querySelectorAll('[data-assoc-id]').forEach((el) => {
+    el.addEventListener('click', () => selectSpecies(el.dataset.assocId));
+  });
+}
+
+function renderAssociations(species) {
+  const assocs = species.associations || [];
+  if (!assocs.length) return '';
+
+  const rows = assocs.map((a) => {
+    const pct = Math.round(a.conditional * 100);
+    const seasonTag = a.seasonOverlap >= 0.5
+      ? '<span class="assoc-season">same season</span>'
+      : '';
+    return `
+      <button class="assoc-item" data-assoc-id="${a.id}">
+        <span class="assoc-name">${a.commonName} ${seasonTag}</span>
+        <span class="assoc-stats">
+          <strong>${pct}%</strong> of its areas
+          <span class="assoc-lift" title="How much more often than chance">·&nbsp;${a.lift}× chance</span>
+        </span>
+      </button>`;
+  }).join('');
+
+  return `
+    <div class="section associations">
+      <h3>Often found nearby</h3>
+      <p class="assoc-intro">
+        Where you find ${species.commonName.toLowerCase()}, these tend to grow close by
+        (from spatial co-occurrence; tap to explore).
+      </p>
+      ${rows}
+    </div>
+  `;
 }
 
 function renderProvenance(species) {

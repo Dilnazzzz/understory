@@ -12,6 +12,7 @@ from pathlib import Path
 import yaml
 
 from aggregate_hexes import aggregate_hexes
+from cooccurrence import compute_cooccurrence
 from derive_season import derive_season
 from fetch_occurrences import fetch_occurrences
 from resolve_taxa import resolve_taxon
@@ -140,6 +141,14 @@ def build(species_ids: list[str] | None = None, debug: bool = False) -> dict:
         result = process_species(entry, region, edibility, debug=debug)
         if result:
             results.append(result)
+
+    # Indicator-species graph (needs all species' hexes together).
+    associations = compute_cooccurrence(results)
+    for sp in results:
+        sp["associations"] = associations.get(sp["id"], [])
+    if debug:
+        edges = sum(len(v) for v in associations.values())
+        print(f"\nCo-occurrence graph: {edges} associations across {len(results)} species")
 
     output = {
         "region": region,

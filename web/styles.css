@@ -396,6 +396,47 @@ footer#disclaimer {
 }
 .popup-links a:hover { text-decoration: underline; }
 
+/* --- Associations (indicator-species graph) --- */
+.section.associations .assoc-intro {
+  font-size: 0.78rem;
+  color: var(--muted);
+  line-height: 1.45;
+  margin-bottom: 0.5rem;
+}
+.assoc-item {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  gap: 0.75rem;
+  width: 100%;
+  text-align: left;
+  background: var(--surface);
+  border: 1px solid var(--border);
+  border-radius: 6px;
+  padding: 0.5rem 0.6rem;
+  margin-bottom: 0.4rem;
+  color: var(--text);
+  cursor: pointer;
+  transition: background 0.15s, border-color 0.15s;
+}
+.assoc-item:hover {
+  background: rgba(124, 179, 66, 0.12);
+  border-color: var(--accent-dim);
+}
+.assoc-name { font-size: 0.85rem; font-weight: 500; }
+.assoc-season {
+  font-size: 0.6rem;
+  background: var(--accent-dim);
+  color: #fff;
+  padding: 0.08rem 0.3rem;
+  border-radius: 3px;
+  margin-left: 0.3rem;
+  vertical-align: middle;
+}
+.assoc-stats { font-size: 0.72rem; color: var(--muted); text-align: right; white-space: nowrap; }
+.assoc-stats strong { color: var(--peak); }
+.assoc-lift { color: var(--muted); }
+
 /* --- Detail panel provenance --- */
 .section.provenance .prov-list {
   list-style: none;

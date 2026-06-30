@@ -8,7 +8,7 @@
       38.5
     ]
   },
-  "generatedAt": "2026-06-30T00:51:11.362532+00:00",
+  "generatedAt": "2026-06-30T01:05:37.893893+00:00",
   "species": [
     {
       "id": "rubus_armeniacus",
@@ -7680,7 +7680,33 @@
           "PFAF",
           "USDA PLANTS"
         ]
-      }
+      },
+      "associations": [
+        {
+          "id": "foeniculum_vulgare",
+          "commonName": "Wild fennel",
+          "sharedHexes": 259,
+          "conditional": 0.481,
+          "lift": 1.3,
+          "seasonOverlap": 0.94
+        },
+        {
+          "id": "allium_triquetrum",
+          "commonName": "Three-cornered leek",
+          "sharedHexes": 223,
+          "conditional": 0.414,
+          "lift": 1.37,
+          "seasonOverlap": 0.33
+        },
+        {
+          "id": "taraxacum_officinale",
+          "commonName": "Common dandelion",
+          "sharedHexes": 207,
+          "conditional": 0.384,
+          "lift": 1.37,
+          "seasonOverlap": 0.92
+        }
+      ]
     },
     {
       "id": "taraxacum_officinale",
@@ -12904,7 +12930,33 @@
         "sources": [
           "PFAF"
         ]
-      }
+      },
+      "associations": [
+        {
+          "id": "rubus_armeniacus",
+          "commonName": "Himalayan blackberry",
+          "sharedHexes": 207,
+          "conditional": 0.559,
+          "lift": 1.37,
+          "seasonOverlap": 0.92
+        },
+        {
+          "id": "foeniculum_vulgare",
+          "commonName": "Wild fennel",
+          "sharedHexes": 184,
+          "conditional": 0.497,
+          "lift": 1.35,
+          "seasonOverlap": 0.9
+        },
+        {
+          "id": "allium_triquetrum",
+          "commonName": "Three-cornered leek",
+          "sharedHexes": 172,
+          "conditional": 0.465,
+          "lift": 1.54,
+          "seasonOverlap": 0.35
+        }
+      ]
     },
     {
       "id": "urtica_dioica",
@@ -13425,7 +13477,49 @@
         "sources": [
           "PFAF"
         ]
-      }
+      },
+      "associations": [
+        {
+          "id": "rubus_ursinus",
+          "commonName": "California blackberry",
+          "sharedHexes": 19,
+          "conditional": 0.633,
+          "lift": 1.67,
+          "seasonOverlap": 0.48
+        },
+        {
+          "id": "allium_triquetrum",
+          "commonName": "Three-cornered leek",
+          "sharedHexes": 18,
+          "conditional": 0.6,
+          "lift": 1.98,
+          "seasonOverlap": 0.39
+        },
+        {
+          "id": "umbellularia_californica",
+          "commonName": "California bay laurel",
+          "sharedHexes": 17,
+          "conditional": 0.567,
+          "lift": 1.44,
+          "seasonOverlap": 0.4
+        },
+        {
+          "id": "claytonia_perfoliata",
+          "commonName": "Miner's lettuce",
+          "sharedHexes": 17,
+          "conditional": 0.567,
+          "lift": 1.31,
+          "seasonOverlap": 0.5
+        },
+        {
+          "id": "rubus_armeniacus",
+          "commonName": "Himalayan blackberry",
+          "sharedHexes": 16,
+          "conditional": 0.533,
+          "lift": 1.31,
+          "seasonOverlap": 0.42
+        }
+      ]
     },
     {
       "id": "allium_triquetrum",
@@ -19163,7 +19257,49 @@
           "PFAF",
           "Calflora"
         ]
-      }
+      },
+      "associations": [
+        {
+          "id": "claytonia_perfoliata",
+          "commonName": "Miner's lettuce",
+          "sharedHexes": 224,
+          "conditional": 0.561,
+          "lift": 1.3,
+          "seasonOverlap": 0.74
+        },
+        {
+          "id": "rubus_armeniacus",
+          "commonName": "Himalayan blackberry",
+          "sharedHexes": 223,
+          "conditional": 0.559,
+          "lift": 1.37,
+          "seasonOverlap": 0.33
+        },
+        {
+          "id": "rubus_ursinus",
+          "commonName": "California blackberry",
+          "sharedHexes": 196,
+          "conditional": 0.491,
+          "lift": 1.3,
+          "seasonOverlap": 0.42
+        },
+        {
+          "id": "foeniculum_vulgare",
+          "commonName": "Wild fennel",
+          "sharedHexes": 187,
+          "conditional": 0.469,
+          "lift": 1.27,
+          "seasonOverlap": 0.35
+        },
+        {
+          "id": "taraxacum_officinale",
+          "commonName": "Common dandelion",
+          "sharedHexes": 172,
+          "conditional": 0.431,
+          "lift": 1.54,
+          "seasonOverlap": 0.35
+        }
+      ]
     },
     {
       "id": "sambucus_caerulea",
@@ -19679,7 +19815,25 @@
           "PFAF",
           "USDA"
         ]
-      }
+      },
+      "associations": [
+        {
+          "id": "rubus_ursinus",
+          "commonName": "California blackberry",
+          "sharedHexes": 17,
+          "conditional": 0.567,
+          "lift": 1.49,
+          "seasonOverlap": 0.38
+        },
+        {
+          "id": "umbellularia_californica",
+          "commonName": "California bay laurel",
+          "sharedHexes": 16,
+          "conditional": 0.533,
+          "lift": 1.35,
+          "seasonOverlap": 0.38
+        }
+      ]
     },
     {
       "id": "foeniculum_vulgare",
@@ -26641,7 +26795,33 @@
           "PFAF",
           "Cornell toxic plants"
         ]
-      }
+      },
+      "associations": [
+        {
+          "id": "rubus_armeniacus",
+          "commonName": "Himalayan blackberry",
+          "sharedHexes": 259,
+          "conditional": 0.532,
+          "lift": 1.3,
+          "seasonOverlap": 0.94
+        },
+        {
+          "id": "allium_triquetrum",
+          "commonName": "Three-cornered leek",
+          "sharedHexes": 187,
+          "conditional": 0.384,
+          "lift": 1.27,
+          "seasonOverlap": 0.35
+        },
+        {
+          "id": "taraxacum_officinale",
+          "commonName": "Common dandelion",
+          "sharedHexes": 184,
+          "conditional": 0.378,
+          "lift": 1.35,
+          "seasonOverlap": 0.9
+        }
+      ]
     },
     {
       "id": "rubus_ursinus",
@@ -33797,7 +33977,33 @@
         "sources": [
           "PFAF"
         ]
-      }
+      },
+      "associations": [
+        {
+          "id": "claytonia_perfoliata",
+          "commonName": "Miner's lettuce",
+          "sharedHexes": 296,
+          "conditional": 0.592,
+          "lift": 1.37,
+          "seasonOverlap": 0.54
+        },
+        {
+          "id": "umbellularia_californica",
+          "commonName": "California bay laurel",
+          "sharedHexes": 281,
+          "conditional": 0.562,
+          "lift": 1.43,
+          "seasonOverlap": 0.76
+        },
+        {
+          "id": "allium_triquetrum",
+          "commonName": "Three-cornered leek",
+          "sharedHexes": 196,
+          "conditional": 0.392,
+          "lift": 1.3,
+          "seasonOverlap": 0.42
+        }
+      ]
     },
     {
       "id": "claytonia_perfoliata",
@@ -41848,7 +42054,33 @@
           "PFAF",
           "Calflora"
         ]
-      }
+      },
+      "associations": [
+        {
+          "id": "umbellularia_californica",
+          "commonName": "California bay laurel",
+          "sharedHexes": 320,
+          "conditional": 0.562,
+          "lift": 1.43,
+          "seasonOverlap": 0.42
+        },
+        {
+          "id": "rubus_ursinus",
+          "commonName": "California blackberry",
+          "sharedHexes": 296,
+          "conditional": 0.52,
+          "lift": 1.37,
+          "seasonOverlap": 0.54
+        },
+        {
+          "id": "allium_triquetrum",
+          "commonName": "Three-cornered leek",
+          "sharedHexes": 224,
+          "conditional": 0.394,
+          "lift": 1.3,
+          "seasonOverlap": 0.74
+        }
+      ]
     },
     {
       "id": "umbellularia_californica",
@@ -49301,7 +49533,25 @@
         "sources": [
           "PFAF"
         ]
-      }
+      },
+      "associations": [
+        {
+          "id": "claytonia_perfoliata",
+          "commonName": "Miner's lettuce",
+          "sharedHexes": 320,
+          "conditional": 0.615,
+          "lift": 1.43,
+          "seasonOverlap": 0.42
+        },
+        {
+          "id": "rubus_ursinus",
+          "commonName": "California blackberry",
+          "sharedHexes": 281,
+          "conditional": 0.54,
+          "lift": 1.43,
+          "seasonOverlap": 0.76
+        }
+      ]
     },
     {
       "id": "malva_sylvestris",
@@ -49518,7 +49768,49 @@
         "sources": [
           "PFAF"
         ]
-      }
+      },
+      "associations": [
+        {
+          "id": "allium_triquetrum",
+          "commonName": "Three-cornered leek",
+          "sharedHexes": 8,
+          "conditional": 1.0,
+          "lift": 3.31,
+          "seasonOverlap": 0.19
+        },
+        {
+          "id": "foeniculum_vulgare",
+          "commonName": "Wild fennel",
+          "sharedHexes": 7,
+          "conditional": 0.875,
+          "lift": 2.37,
+          "seasonOverlap": 0.16
+        },
+        {
+          "id": "taraxacum_officinale",
+          "commonName": "Common dandelion",
+          "sharedHexes": 6,
+          "conditional": 0.75,
+          "lift": 2.67,
+          "seasonOverlap": 0.17
+        },
+        {
+          "id": "rubus_armeniacus",
+          "commonName": "Himalayan blackberry",
+          "sharedHexes": 6,
+          "conditional": 0.75,
+          "lift": 1.84,
+          "seasonOverlap": 0.15
+        },
+        {
+          "id": "rubus_ursinus",
+          "commonName": "California blackberry",
+          "sharedHexes": 4,
+          "conditional": 0.5,
+          "lift": 1.32,
+          "seasonOverlap": 0.17
+        }
+      ]
     }
   ]
 }
